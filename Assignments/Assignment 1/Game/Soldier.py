@@ -133,6 +133,7 @@ class Soldier:
         die1 = random.randint(1,6)
         die2 = random.randint(1,6)
         numRolled = die1 + die2
+        missionComplete = False
         while self.stamina > 0:
             print(f"Your stamina: {self.stamina}")
             
@@ -149,7 +150,16 @@ class Soldier:
                 
                 if hiddenCheck >= 10:
                     print("You managed to successfully sneak through the kingdom and assassinate the king, you are now the king!")
+                    missionComplete = True
+                    gold += 100
+                    self.stamina += 2
+                    self.damage += 1
+                    self.armor += 1
+                    self.challenges.remove({"name": "Invade your first kingdom", "attribute": "stamina"})
+                    self.questCompleted = True
+                    self.shopVisited = False
                     return True
+
                 else:
                     print("You Were Spotted! The kings guards are chasing you, you need to run!")
                     self.stamina -= random.randint(1,3)
@@ -164,6 +174,14 @@ class Soldier:
                 
                 if battleCheck >= 10:
                     print("You fought a hard battle,  you and your soliders manage to take over the kingdom! Victory is yours. ")
+                    missionComplete == True
+                    gold += 60
+                    self.stamina += 2
+                    self.damage += 1
+                    self.armor += 1
+                    self.questCompleted = True
+                    self.shopVisited = False
+                    self.challenges.remove({"name": "Invade your first kingdom", "attribute": "stamina"})
                     return True
                 else:
                     print("The kingdosm defenses are strong. You and your soliders need to retreat!")
@@ -176,15 +194,6 @@ class Soldier:
             else:
                 print("Invalid Input. Please Enter '1' or '2'")
                 
-                    
-                
-                
-                
-                
-                
-                
-        
-    
     def overthrowKing(self):
         if 1 > 2:
             print("You have not completed the previous challenges yet!")
