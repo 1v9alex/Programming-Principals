@@ -7,6 +7,8 @@ Professor: Muhammad Asif
 '''
 
 import random
+import string
+
 
 from Soldier import Soldier
 
@@ -57,25 +59,3 @@ class Game:
             exit()
         else:
             print("Invalid choice! Please enter a number between 1 and 5")
-            
-            
-    def viewInventory(self):
-        print("\nYour Inventory: ")
-        print("Gold:", self.gold)
-        print("\nOffensive Items:")
-        if self.player.items["Offensive"]:
-            for item in self.player.items["Offensive"]:
-                print(f"- {item}")
-        else:
-            print("You do not have any offensive items.")
-            
-        print("\nDefensive Items:")
-        if self.player.items["Defensive"]:
-            for item in self.player.items["Defensive"]:
-                print(f"- {item}")
-        else:
-            print("You do not have any defensive items.")
-                
-            
-            
-            

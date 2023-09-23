@@ -1,4 +1,5 @@
 import random
+import string
 
 #Creating and initalizing the soldier class
 
@@ -8,7 +9,7 @@ class Soldier:
         self.name = name
         self.gold = 10
         self.health = 50
-        self.damage = 2
+        self.damage = 999
         self.armor = 1
         self.stamina = 1
         self.questCompleted = False
@@ -138,7 +139,6 @@ class Soldier:
         while True:
             print("\nWelcome to the shop!")
             print("You Currently Have:", self.gold, "gold")
-            print("\nAvailable Items:")
                 
             print("Offensive Items:")
             for item, cost in self.shopItems["Offensive"].items():
@@ -149,8 +149,9 @@ class Soldier:
                 print(f"{item}: {cost} gold")
                 
             itemToBuy = input("\nWhat would you like to buy? (Type 'exit' to exit): ").title()
+            formattedInput = itemToBuy.strip().lower().translate(str.maketrans('', '', string.punctuation))
             
-            if itemToBuy == 'exit':
+            if formattedInput == 'exit':
                 break
             
             foundItem = None
@@ -158,10 +159,12 @@ class Soldier:
             
             #Checking if the item exists in the shop
             for itype, items in self.shopItems.items():
-                if itemToBuy in items:
-                    foundItem = itemToBuy
-                    itemType = itype
-                    break
+                if item in items:
+                    formattedItem = item.lower().translate(str.maketrans('', '', string.punctuation))
+                    if formattedInput == formattedItem:
+                        foundItem = item
+                        itemType = itype
+                        break
             
             if foundItem:
                 if self.gold >= self.shopItems[itemType][foundItem]:
@@ -175,6 +178,26 @@ class Soldier:
                 print("Invalid item name. Please type the exact name of the item!")
             
             self.shopVisited = True
+            
+    
+    def viewInventory(self):
+            print("\nYour Inventory: ")
+            print("Gold:", self.gold)
+            print("\nOffensive Items:")
+            if self.items["Offensive"]:
+                for item in self.items["Offensive"]:
+                    print(f"- {item}")
+            else:
+                print("You do not have any offensive items.")
+                
+            print("\nDefensive Items:")
+            if self.items["Defensive"]:
+                for item in self.items["Defensive"]:
+                    print(f"- {item}")
+            else:
+                print("You do not have any defensive items.")
+        
+
 
     def startNextQuest(self):
         if self.questsCompletedCount == 0:
