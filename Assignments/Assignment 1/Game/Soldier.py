@@ -3,15 +3,22 @@ import string
 
 #Creating and initalizing the soldier class
 
+'''
+TODO Fix the output of the shop to make it read better
+Add logic for other challenges
+Fix prints for the dragon battle to make it read better
+Fix stats (make them do something)
+Add dragon attacking to make the battle harder
+'''
 class Soldier:
     def __init__(self, name):
         #Initializing the attributes of the soldier
         self.name = name
         self.gold = 10
         self.health = 50
-        self.damage = 999
+        self.damage = 2
         self.armor = 1
-        self.stamina = 1
+        self.stamina = 2
         self.questCompleted = False
         self.shopVisited = True
         self.questsCompletedCount = 0
@@ -115,9 +122,67 @@ class Soldier:
                     break
     
     def invadeKingdom(self):
-        if 1 > 3:
-            print("You have not completed the previous challenges yet!")
-            return
+        print("A fellow solider noticed your fight against that dragon and has tasked you with scouting a nearby kingdom to see if it is weak enough to invade")
+        print("You arrive at the kingdom and notice that it is heavily guarded")
+        print("You decide to sneak into the kingdom to see if you can find any weaknesses")
+        print("You find a weak spot in the wall and decide to sneak in")
+        print("Your goal is to not get caught inside the kingdom")
+        
+        choice = input("You have two options 1)Sneak in the kingdom and try to kill the king or 2)Call your fellow soldiers to invade the kingdom")
+        
+        die1 = random.randint(1,6)
+        die2 = random.randint(1,6)
+        numRolled = die1 + die2
+        while self.stamina > 0:
+            print(f"Your stamina: {self.stamina}")
+            
+            if choice == '1':
+                print("You decide to sneak in the kingdom and try to kill the king")
+                
+                print("You Decide to walk around the kingdom to see if you can find the king")
+                
+                print("After a sneaking around for a while you manage to make it into the castle")
+                
+                print("The castle is heavily guarded you have to sneak around, if you get caught you will be thrown in the dungeon")
+                
+                hiddenCheck = random.randint(1,12) + self.stamina
+                
+                if hiddenCheck >= 10:
+                    print("You managed to successfully sneak through the kingdom and assassinate the king, you are now the king!")
+                    return True
+                else:
+                    print("You Were Spotted! The kings guards are chasing you, you need to run!")
+                    self.stamina -= random.randint(1,3)
+                    if self.stamina <= 0:
+                        print("You were caught and thrown in the dungeon! The Assassination failed!")
+                        return False
+                    else:
+                        print("You managed to escape and hide. But you lost your stamina running")
+            elif choice == '2':
+                print("You decide to call your fellow soldiers to invade the kingdom")
+                battleCheck = random.randint(1,12) + self.stamina
+                
+                if battleCheck >= 10:
+                    print("You fought a hard battle,  you and your soliders manage to take over the kingdom! Victory is yours. ")
+                    return True
+                else:
+                    print("The kingdosm defenses are strong. You and your soliders need to retreat!")
+                    self.stamina -= random.randint(1,3)
+                    if self.stamina <= 0:
+                        print("Your soliders were defeated and you were captured! The invasion failed!")
+                        return False
+                    else:
+                        print("You managed to escape and hide. But you lost your stamina running")
+            else:
+                print("Invalid Input. Please Enter '1' or '2'")
+                
+                    
+                
+                
+                
+                
+                
+                
         
     
     def overthrowKing(self):
@@ -132,11 +197,14 @@ class Soldier:
             return
         
     def visitShop(self):
+        #Creating the logic for visiting the shop
         if self.questsCompletedCount <= 0 or (self.questsCompletedCount <= len(self.challenges) and self.shopVisited):
             print("You cant visit the shop now!")
             return
         
+        
         while True:
+            #Loop to print the shop items
             print("\nWelcome to the shop!")
             print("You Currently Have:", self.gold, "gold")
                 
@@ -181,6 +249,7 @@ class Soldier:
             
     
     def viewInventory(self):
+        #Creating the logic for viewing the inventory
             print("\nYour Inventory: ")
             print("Gold:", self.gold)
             print("\nOffensive Items:")
@@ -209,12 +278,7 @@ class Soldier:
             challenge = self.challenges[0] # getting the next challenge
             challengeName = challenge["name"]
             print(f"\nStarting quest: {challengeName}")
-            
-            #Checking if the player is allowed to visit the shop before starting the quest
-            if not self.shopVisited and self.questsCompletedCount > 0:
-                self.visitShop()
-            
-            
+                        
             #Adding the logic for the next quests
             if challengeName == "Invade your first kingdom":
                 self.invadeKingdom()
