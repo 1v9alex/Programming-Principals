@@ -39,74 +39,79 @@ class Soldier:
         print("While returning from a long journey, you encounter a dragon!")
             
         dragonHealth = 30
-        dragonDamage = random.randint(2,12)
+        
+        inBattle = False
             
         while True: #Creating a loop that will run until you choose to battle the dragon
-            dragonChoice = input("Do you want to battle the dragon? (y/n): ").lower()
+            if not inBattle:
+                dragonChoice = input("Do you want to battle the dragon? (y/n): ").lower()
+                    
+                if dragonChoice in {'n','no'}:
+                    print("You remember the kings words, \"I became king because I never backed down from a challenge\"")
+                    continue #skips to the next iteration of the loop asking the user again
+                elif dragonChoice not in {'y','yes'}:
+                    print("Invalid Input. Please Enter 'y', 'yes', 'n', or 'no'")
+                    continue #skips to the next iteration of the loop asking the user again
                 
-            if dragonChoice in {'y','yes'}:
-                print("You have chosen to battle the dragon!")
+                inBattle = True
+                
+                #Battle logic
                 while self.health > 0 and dragonHealth > 0:
-                    print("You angered the dragon, and it attacks you!")
+                    dragonDamage = random.randint(1,6) + random.randint(1,6)
                     
-                print("Luckily You dodged its attack, what will you do now?")
-                print(f"Your health: {self.health}, Dragon's health: {dragonHealth}")
+                    print(f"Your health: {self.health}, Dragon's health: {dragonHealth}")
 
-                choice = input("Do you want to 1) Attack or 2) Defend")
-                die1 = random.randint(1,6)
-                die2 = random.randint(1,6)
-                numRolled = die1 + die2
-                criticalStrike = die1 == die2
+                    choice = input("Do you want to 1) Attack or 2) Defend")
+                    die1 = random.randint(1,6)
+                    die2 = random.randint(1,6)
+                    numRolled = die1 + die2
+                    criticalStrike = die1 == die2
                     
-                if criticalStrike:
-                    print("Critical Strike!")
+                    if criticalStrike:
+                        print("Critical Strike!")
                         
-                if choice == '1': #Attack
-                    print(f"You decide to attackthe dragon!, you rolled a {numRolled}")
-                    dragonAction = random.choice(['dodge', 'defend'])
+                    if choice == '1': #Attack
+                        print(f"You decide to attack the dragon!, you rolled a {numRolled}")
+                        dragonAction = random.choice(['dodge', 'defend'])
                         
-                    if dragonAction == 'dodge':
-                        if numRolled < 6:
-                            print("The Dragon dodged your attack!")
+                        if dragonAction == 'dodge':
+                            if numRolled < 6:
+                                print("The Dragon dodged your attack!")
+                            else:
+                                print("You hit the dragon!")
+                                damage = numRolled + (2 if criticalStrike else 0)
+                                dragonHealth -= damage
                         else:
-                            print("You hit the dragon!")
-                            damage = numRolled + (2 if criticalStrike else 0)
-                            dragonHealth -= damage
-                    else:
-                        print("The dragon defended your attack!, You will deal reduced damage")
-                        damage = numRolled + (2 if criticalStrike else 0) - 1
-                        dragonHealth -=  max(damage - dragonHealth, 0)
+                            print("The dragon defended your attack!, You will deal reduced damage")
+                            damage = numRolled + (2 if criticalStrike else 0) - 1
+                            dragonHealth -=  max(damage - dragonHealth, 0)
                     
-                elif choice == '2': #Defend
-                    print("You decide to defend against the dragon!")
-                    dragonAttack = random.randint(1,6) + random.randint(1,6)
-                    if dragonAttack > 6:
-                        print("The dragon hit you!")
-                        damage = dragonAttack - self.armor
-                        self.health -= max(damage - self.health, 0)
-                    else:
-                        print("The dragon missed!")
+                    elif choice == '2': #Defend
+                        print("You decide to defend against the dragon!")
+                        dragonAttack = random.randint(1,6) + random.randint(1,6)
+                        if dragonAttack > 6:
+                            print("The dragon hit you!")
+                            damage = dragonAttack - self.armor
+                            self.health -= max(damage - self.health, 0)
+                        else:
+                            print("The dragon missed!")
                             
-                if dragonHealth <= 0:
-                    print("You have defeated the dragon!")
-                    self.challenges.remove({"name": "Battle your first dragon", "attribute": "damage"})
-                    self.damage += 2
-                    self.gold += 30
-                    print("You have gained 30 gold!")
-                    self.questCompleted = True
-                    self.shopVisited = False
-                    self.questsCompletedCount += 1
+                    if dragonHealth <= 0:
+                        print("You have defeated the dragon!")
+                        self.challenges.remove({"name": "Battle your first dragon", "attribute": "damage"})
+                        self.damage += 2
+                        self.gold += 30
+                        print("You have gained 30 gold!")
+                        self.questCompleted = True
+                        self.shopVisited = False
+                        self.questsCompletedCount += 1
+                        break
+                    elif self.health <= 0:
+                        print("You have been defeated by the dragon!")
+                        print("GAME OVER")
+                        break
+                if inBattle:
                     break
-                elif self.health <= 0:
-                    print("You have been defeated by the dragon!")
-                    print("GAME OVER")
-                    break
-                        
-                break
-            elif dragonChoice in {'n','no'}:
-                print("You remember the kings words, \"I became king because I never backed down from a challenge\"")
-            else:
-                print("Invalid Input. Please Enter 'y', 'yes', 'n', or 'no'")
     
     def invadeKingdom(self):
         if 1 > 3:
@@ -121,12 +126,12 @@ class Soldier:
         
     
     def becomeKing(self):
-        if 1 > 1000
+        if 1 > 1000:
             print("You have not completed the previous challenges yet!")
             return
         
     def visitShop(self):
-        if self.quests_completed_count <= 0 or (self.quests_completed_count <= len(self.challenges) and self.shop_visited):
+        if self.questsCompletedCount <= 0 or (self.questsCompletedCount <= len(self.challenges) and self.shopVisited):
             print("You cant visit the shop now!")
             return
         
@@ -202,4 +207,5 @@ class Soldier:
             
         else:
             print("You have completed all the quests!, You are the new king!")
+
 
