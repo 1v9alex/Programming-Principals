@@ -1,5 +1,6 @@
 import random
 import string
+import time
 
 #Creating and initalizing the soldier class
 
@@ -123,12 +124,18 @@ class Soldier:
     
     def invadeKingdom(self):
         print("A fellow solider noticed your fight against that dragon and has tasked you with scouting a nearby kingdom to see if it is weak enough to invade")
+        time.sleep(2)
         print("You arrive at the kingdom and notice that it is heavily guarded")
+        time.sleep(2)
         print("You decide to sneak into the kingdom to see if you can find any weaknesses")
+        time.sleep(2)
         print("You find a weak spot in the wall and decide to sneak in")
+        time.sleep(2)
         print("Your goal is to not get caught inside the kingdom")
+        time.sleep(2)
         
         choice = input("You have two options 1)Sneak in the kingdom and try to kill the king or 2)Call your fellow soldiers to invade the kingdom")
+        time.sleep(3)
         
         die1 = random.randint(1,6)
         die2 = random.randint(1,6)
@@ -139,25 +146,27 @@ class Soldier:
             
             if choice == '1':
                 print("You decide to sneak in the kingdom and try to kill the king")
-                
+                time.sleep(3)
                 print("You Decide to walk around the kingdom to see if you can find the king")
-                
+                time.sleep(3)
                 print("After a sneaking around for a while you manage to make it into the castle")
-                
+                time.sleep(3)
                 print("The castle is heavily guarded you have to sneak around, if you get caught you will be thrown in the dungeon")
-                
+                time.sleep(3)
                 hiddenCheck = random.randint(1,12) + self.stamina
                 
                 if hiddenCheck >= 10:
                     print("You managed to successfully sneak through the kingdom and assassinate the king, you are now the king!")
                     missionComplete = True
-                    gold += 100
+                    self.gold += 100
                     self.stamina += 2
                     self.damage += 1
                     self.armor += 1
                     self.challenges.remove({"name": "Invade your first kingdom", "attribute": "stamina"})
                     self.questCompleted = True
                     self.shopVisited = False
+                    self.questsCompletedCount += 1
+
                     return True
 
                 else:
@@ -175,16 +184,18 @@ class Soldier:
                 if battleCheck >= 10:
                     print("You fought a hard battle,  you and your soliders manage to take over the kingdom! Victory is yours. ")
                     missionComplete == True
-                    gold += 60
+                    self.gold += 60
                     self.stamina += 2
                     self.damage += 1
                     self.armor += 1
                     self.questCompleted = True
                     self.shopVisited = False
                     self.challenges.remove({"name": "Invade your first kingdom", "attribute": "stamina"})
+                    self.questsCompletedCount += 1
+
                     return True
                 else:
-                    print("The kingdosm defenses are strong. You and your soliders need to retreat!")
+                    print("The kingdom defenses are strong. You and your soliders need to retreat!")
                     self.stamina -= random.randint(1,3)
                     if self.stamina <= 0:
                         print("Your soliders were defeated and you were captured! The invasion failed!")
@@ -193,6 +204,18 @@ class Soldier:
                         print("You managed to escape and hide. But you lost your stamina running")
             else:
                 print("Invalid Input. Please Enter '1' or '2'")
+                
+            if missionComplete:
+                print("You have completed the mission!")
+                return
+                
+            retry = input("You have failed the mission. Would you like to retry? (yes/no): ").lower()
+            if retry != 'yes':
+                print("Thanks for playing! Exiting game")
+                time.sleep(2)
+                exit()
+
+            
                 
     def overthrowKing(self):
         if 1 > 2:
