@@ -327,6 +327,7 @@ class Soldier:
             #Loop to print the shop items
             print("\nWelcome to the shop!")
             print("You Currently Have:", self.gold, "gold")
+            time.sleep(2)
                 
             print("Offensive Items:")
             for item, cost in self.shopItems["Offensive"].items():
@@ -359,7 +360,12 @@ class Soldier:
                     #deduct the gold from the player and then add the item to the player's inventory
                     self.gold = self.gold - self.shopItems[itemType][foundItem]
                     self.items[itemType].append(foundItem)
+                    time.sleep(1)
                     print(f"You have bought {foundItem} for {self.shopItems[itemType][foundItem]} gold!")
+                    time.sleep(2)
+                    buyMore = input("Would you like to buy another item? (y/n): ").lower()
+                    if buyMore != 'y':
+                        break
                 else:
                     print("You don't have enough gold!")
             else:
