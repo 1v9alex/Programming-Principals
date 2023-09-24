@@ -44,7 +44,8 @@ class Game:
         print("1) Start Next Quest")
         print("2) Visit Shop")
         print("3) View Inventory")
-        print("4) Quit Game")
+        print("4) View Stats")
+        print("5) Quit Game")
         
     
     def choicePicked(self, choice):
@@ -55,6 +56,8 @@ class Game:
         elif choice == '3':
             self.player.viewInventory()
         elif choice == '4':
+            self.player.viewStats()
+        elif choice == '5':
             print("Thanks for playing! Exiting game")
             exit()
         else:

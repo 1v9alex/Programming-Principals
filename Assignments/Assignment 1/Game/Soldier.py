@@ -8,7 +8,7 @@ import time
 TODO Fix the output of the shop to make it read better
 Add logic for other challenges
 Fix prints for the dragon battle to make it read better
-Fix stats (make them do something)
+Fix stats on items (make them do something)
 Add dragon attacking to make the battle harder
 '''
 class Soldier:
@@ -16,9 +16,9 @@ class Soldier:
         #Initializing the attributes of the soldier
         self.name = name
         self.gold = 10
-        self.health = 50
-        self.damage = 2
-        self.armor = 1
+        self.health = 500
+        self.damage = 10000
+        self.armour = 10000
         self.stamina = 2
         self.questCompleted = False
         self.shopVisited = True
@@ -29,7 +29,7 @@ class Soldier:
         self.challenges = [
             {"name": "Battle your first dragon", "attribute": "damage"},
             {"name": "Invade your first kingdom", "attribute": "stamina"},
-            {"name": "Overthrow the evil king", "attribute": "armor"},
+            {"name": "Overthrow the evil king", "attribute": "armour"},
             {"name": "Become The King", "attribute": "Damage"}
                         
                         ]
@@ -100,7 +100,7 @@ class Soldier:
                         dragonAttack = random.randint(1,6) + random.randint(1,6)
                         if dragonAttack > 6:
                             print("The dragon hit you!")
-                            damage = dragonAttack - self.armor
+                            damage = dragonAttack - self.armour
                             self.health -= max(damage - self.health, 0)
                         else:
                             print("The dragon missed!")
@@ -124,18 +124,18 @@ class Soldier:
     
     def invadeKingdom(self):
         print("A fellow solider noticed your fight against that dragon and has tasked you with scouting a nearby kingdom to see if it is weak enough to invade")
-        time.sleep(2)
+        time.sleep(1)
         print("You arrive at the kingdom and notice that it is heavily guarded")
-        time.sleep(2)
+        time.sleep(1)
         print("You decide to sneak into the kingdom to see if you can find any weaknesses")
-        time.sleep(2)
+        time.sleep(1)
         print("You find a weak spot in the wall and decide to sneak in")
-        time.sleep(2)
+        time.sleep(1)
         print("Your goal is to not get caught inside the kingdom")
-        time.sleep(2)
+        time.sleep(1)
         
-        choice = input("You have two options 1)Sneak in the kingdom and try to kill the king or 2)Call your fellow soldiers to invade the kingdom")
-        time.sleep(3)
+        choice = input("You have two options 1) Sneak in the kingdom and try to kill the king or 2) Call your fellow soldiers to invade the kingdom ")
+        time.sleep(2)
         
         die1 = random.randint(1,6)
         die2 = random.randint(1,6)
@@ -153,7 +153,7 @@ class Soldier:
                 time.sleep(3)
                 print("The castle is heavily guarded you have to sneak around, if you get caught you will be thrown in the dungeon")
                 time.sleep(3)
-                hiddenCheck = random.randint(1,12) + self.stamina
+                hiddenCheck = random.randint(2,12) + self.stamina
                 
                 if hiddenCheck >= 10:
                     print("You managed to successfully sneak through the kingdom and assassinate the king, you are now the king!")
@@ -161,7 +161,7 @@ class Soldier:
                     self.gold += 100
                     self.stamina += 2
                     self.damage += 1
-                    self.armor += 1
+                    self.armour += 2
                     self.challenges.remove({"name": "Invade your first kingdom", "attribute": "stamina"})
                     self.questCompleted = True
                     self.shopVisited = False
@@ -179,7 +179,7 @@ class Soldier:
                         print("You managed to escape and hide. But you lost your stamina running")
             elif choice == '2':
                 print("You decide to call your fellow soldiers to invade the kingdom")
-                battleCheck = random.randint(1,12) + self.stamina
+                battleCheck = random.randint(2,12) + self.stamina
                 
                 if battleCheck >= 10:
                     print("You fought a hard battle,  you and your soliders manage to take over the kingdom! Victory is yours. ")
@@ -187,7 +187,7 @@ class Soldier:
                     self.gold += 60
                     self.stamina += 2
                     self.damage += 1
-                    self.armor += 1
+                    self.armour += 2
                     self.questCompleted = True
                     self.shopVisited = False
                     self.challenges.remove({"name": "Invade your first kingdom", "attribute": "stamina"})
@@ -207,20 +207,108 @@ class Soldier:
                 
             if missionComplete:
                 print("You have completed the mission!")
-                return
+                return True
             else:
-                retry = input("You have failed the mission. Would you like to retry? (yes/no): ").lower()
-                if retry != 'yes':
-                    print("Thanks for playing! Exiting game")
-                    time.sleep(2)
-                    exit()
-                else:
-                    break
+                print("You have failed your quest!")
+                break
+        retry = input("You have failed the mission. Would you like to retry? (yes/no): ").lower()
+        if retry != 'yes':
+            print("Thanks for playing! Exiting game")
+            time.sleep(2)
+            exit()
 
     def overthrowKing(self):
-        if 1 > 2:
-            print("You have not completed the previous challenges yet!")
-            return
+        print("Now that you have your own kingdom, its time to overthrow the evil king from your old kingdom!")
+        time.sleep(2)
+        print("Your old kingdom has a much stronger army then you so you have to go alone.")
+        time.sleep(2)
+        print("You find the king and challenge him to a duel to the death, and he accepts!")
+        time.sleep(2)
+        
+        #Setting up variables for the kings stats
+        kingHealth = 50
+        kingDamage = 5
+        kingArmour = 2
+        inBattle = False
+        
+        while True: #Creating a loop that will run until you choose to battle the king
+            if not inBattle:
+                choice = input("Are you ready to duel the king? (y/n): ").lower()
+                
+                if choice in {'n','no'}:
+                    print("Retreating wont help you become king! Gather your courage and fight!")
+                    continue
+                elif choice not in {'y','yes'}:
+                    print("Invalid Input. Please Enter 'y', 'yes', 'n', or 'no'")
+                    continue
+                
+                inBattle = True
+                
+                while self.health > 0 and kingHealth > 0:
+                    print(f"Your Health: {self.health}, Your Armour: {self.armour}, King's Health: {kingHealth}, King's Armour: {kingArmour}")
+                    
+                    choice = input("Do you want to 1) Attack or 2) Defend")
+                    die1 = random.randint(1,6)
+                    die2 = random.randint(1,6)
+                    numRolled = die1 + die2
+                    print(f"You rolled a {numRolled}")
+                    
+                    if choice == '1': #Attack logic
+                        if numRolled > kingArmour:
+                            print("You pierce through the king's armour and deal damage!")
+                            kingHealth -= (numRolled - kingArmour + self.damage)
+                            kingArmour = max(kingArmour - 1, 0)
+                        else:
+                            print("The king's armour is too strong he blocked your attack!")
+                            
+                        #King's attack
+                        kingAttack = random.randint(2,12)
+                        if kingAttack > self.armour:
+                            print("The king strikes back and you take damage!")
+                            self.health -= (kingAttack - self.armour + kingDamage)
+                    
+                    elif choice == '2':
+                        print("You decide to defend against the king's attack!")
+                        kingAttack = random.randint(2,12)
+                        if kingAttack > self.armour:
+                            print("The king pierces through your defense!")
+                            reducedDamage = max(kingAttack - self.armour - numRolled,0) #Damage is reduced by the amount rolled on the dice
+                            self.health -= reducedDamage
+                        else:
+                            print("You successfully defended against the king's attack!")
+                    else:
+                        print("Invalid Input. Please Enter '1' or '2'")
+                        continue
+                    
+                    if kingHealth <= 1:
+                        print("You have defeated the king!")
+                        time.sleep(1)
+                        print("Its almost time to take the throne!")
+                        self.challenges.remove({"name": "Overthrow the evil king", "attribute": "armour"})
+                        self.gold += 1000
+                        self.armour += 2
+                        self.damage += 2
+                        self.stamina += 2
+                        self.questCompleted = True
+                        self.shopVisited = False
+                        self.questsCompletedCount += 1
+                        break
+                    elif self.health <= 0:
+                        print("You have been defeated by the king!")
+                        retry = input("Would you like to retry? (yes/no): ").lower()
+                        if retry == 'yes':
+                            self.health = 50
+                            kingHealth = 50
+                            kingArmour = 5
+                            continue
+                        else:
+                            print("Thanks for playing! Exiting game")
+                            time.sleep(2)
+                            exit()
+                            
+                if inBattle:
+                    break
+        
         
     
     def becomeKing(self):
@@ -298,7 +386,16 @@ class Soldier:
             else:
                 print("You do not have any defensive items.")
         
-
+    def viewStats(self):
+        #Creating the logic for viewing the players stats
+        print("\nYour Stats:")
+        print(f"Name: {self.name}")
+        print(f"Health: {self.health}")
+        print(f"Damage: {self.damage}")
+        print(f"Armour: {self.armour}")
+        print(f"Stamina: {self.stamina}")
+        print(f"Quests Completed: {self.questsCompletedCount}")
+        
 
     def startNextQuest(self):
         if self.questsCompletedCount == 0:
@@ -326,5 +423,3 @@ class Soldier:
             
         else:
             print("You have completed all the quests!, You are the new king!")
-
-
