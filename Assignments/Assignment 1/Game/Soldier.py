@@ -15,16 +15,17 @@ class Soldier:
     def __init__(self, name):
         #Initializing the attributes of the soldier
         self.name = name
-        self.gold = 10
-        self.health = 500
-        self.damage = 10000
-        self.armour = 10000
+        self.gold = 1000
+        self.health = 50
+        self.damage = 2
+        self.armour = 1
         self.stamina = 2
         self.questCompleted = False
         self.shopVisited = True
         self.questsCompletedCount = 0
         #Dictionary of items that the soldier has
         self.items = {"Offensive": [], "Defensive": []}
+        self.inventoryDetails = {"Offensive": {}, "Defensive": {}}
         #List of challenges that the soldier has to complete
         self.challenges = [
             {"name": "Battle your first dragon", "attribute": "damage"},
@@ -36,10 +37,13 @@ class Soldier:
         #Dictionary of items that the shop has for the soldier role
         self.shopItems = {
             "Offensive": {
-                "Dragon's Tooth": 10, "Excalibur": 100, "Blade Of Steel": 5, "Blade Of The Fallen": 50, "Long Sword": 30
+                "Dragon's Tooth": {"cost": 10, "stats": {"damage": 3, "stamina": 1}}, "Excalibur": {"cost": 100, "stats": {"damage":15,"health":10}},
+                "Blade Of Steel": {"cost": 5, "stats": {"damage": 2}}, "Holy Sword": {"cost": 100, "stats": {"damage": 10, "health": 10, "armour": 5,"stamina": 2}},
+                "Blade Of The Fallen": {"cost": 50, "stats":{"damage": 5,"health": 5, "armour": 3}}, "Long Sword": {"cost": 30, "stats": {"damage": 4}},
             },
             "Defensive": {
-                "Armour Of The Gods": 80, "Boots Of Quickness": 50, "Iron Armour": 20
+                "Armour Of The Gods": {"cost": 80, "stats": {"armour": 10, "health": 10, "stamina": 5}}, "Boots Of Quickness": {"cost": 50, "stats": {"stamina": 5}},
+                "Iron Armour": {"cost": 20, "stats": {"armour": 5, "health": 5}}, "Shield Of The Gods": {"cost": 100, "stats": {"armour": 10, "health": 10, "stamina": 5}},
             }
         }
         
@@ -330,12 +334,12 @@ class Soldier:
             time.sleep(2)
                 
             print("Offensive Items:")
-            for item, cost in self.shopItems["Offensive"].items():
-                print(f"{item}: {cost} gold")
+            for itemName, itemDetails in self.shopItems["Offensive"].items():
+                print(f"{itemName}: {itemDetails['cost']} gold")
                 
             print("\nDefensive Items:")
-            for item, cost in self.shopItems["Defensive"].items():
-                print(f"{item}: {cost} gold")
+            for itemName, itemDetails in self.shopItems["Defensive"].items():
+                print(f"{itemName}: {itemDetails['cost']} gold")
                 
             itemToBuy = input("\nWhat would you like to buy? (Type 'exit' to exit): ").title()
             formattedInput = itemToBuy.strip().lower().translate(str.maketrans('', '', string.punctuation))
@@ -348,14 +352,43 @@ class Soldier:
             
             #Checking if the item exists in the shop
             for itype, items in self.shopItems.items():
-                if item in items:
+                for item in items:
                     formattedItem = item.lower().translate(str.maketrans('', '', string.punctuation))
                     if formattedInput == formattedItem:
                         foundItem = item
                         itemType = itype
                         break
+                if foundItem:
+                    break
             
             if foundItem:
+                itemCost = self.shopItems[itemType][foundItem]["cost"]
+                if self.gold >= itemCost:
+                    self.gold -= itemCost
+                    self.inventoryDetails[itemType][foundItem] = self.shopItems[itemType][foundItem]
+
+                    self.items[itemType].append(foundItem)
+                    time.sleep(1)
+                    print(f"You have bought {foundItem} for {itemCost} gold!")
+
+                    
+                    for stat,value in self.shopItems[itemType][foundItem]["stats"].items():
+                        if stat != "cost":
+                            setattr(self, stat, getattr(self, stat) + value)
+                    #Remove the item from the shop once the player has bought it
+                    del self.shopItems[itemType][foundItem]
+                    
+                    buyMore = input("Would you like to buy another item? (y/n): ").lower()
+                    if buyMore != 'y':
+                        break
+                else:
+                    print("You don't have enough gold!")
+            else:
+                print("Invalid item name. Please type the exact name of the item!")
+                
+            self.shopVisited = True
+            
+            '''if foundItem:
                 if self.gold >= self.shopItems[itemType][foundItem]:
                     #deduct the gold from the player and then add the item to the player's inventory
                     self.gold = self.gold - self.shopItems[itemType][foundItem]
@@ -369,9 +402,8 @@ class Soldier:
                 else:
                     print("You don't have enough gold!")
             else:
-                print("Invalid item name. Please type the exact name of the item!")
+                print("Invalid item name. Please type the exact name of the item!")'''
             
-            self.shopVisited = True
             
     
     def viewInventory(self):
@@ -381,14 +413,16 @@ class Soldier:
             print("\nOffensive Items:")
             if self.items["Offensive"]:
                 for item in self.items["Offensive"]:
-                    print(f"- {item}")
+                    itemStats = ", ".join(f"{stat}: {value}" for stat, value in self.inventoryDetails["Offensive"][item]["stats"].items())
+                    print(f"- {item} ({itemStats})")
             else:
                 print("You do not have any offensive items.")
                 
             print("\nDefensive Items:")
             if self.items["Defensive"]:
                 for item in self.items["Defensive"]:
-                    print(f"- {item}")
+                    itemStats = ", ".join(f"{stat}: {value}" for stat, value in self.inventoryDetails["Defensive"][item]["stats"].items())
+                    print(f"- {item} ({itemStats})")
             else:
                 print("You do not have any defensive items.")
         
