@@ -208,15 +208,15 @@ class Soldier:
             if missionComplete:
                 print("You have completed the mission!")
                 return
-                
-            retry = input("You have failed the mission. Would you like to retry? (yes/no): ").lower()
-            if retry != 'yes':
-                print("Thanks for playing! Exiting game")
-                time.sleep(2)
-                exit()
+            else:
+                retry = input("You have failed the mission. Would you like to retry? (yes/no): ").lower()
+                if retry != 'yes':
+                    print("Thanks for playing! Exiting game")
+                    time.sleep(2)
+                    exit()
+                else:
+                    break
 
-            
-                
     def overthrowKing(self):
         if 1 > 2:
             print("You have not completed the previous challenges yet!")
