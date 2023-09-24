@@ -408,6 +408,7 @@ class Soldier:
     
     def viewInventory(self):
         #Creating the logic for viewing the inventory
+        while True:
             print("\nYour Inventory: ")
             print("Gold:", self.gold)
             print("\nOffensive Items:")
@@ -425,6 +426,13 @@ class Soldier:
                     print(f"- {item} ({itemStats})")
             else:
                 print("You do not have any defensive items.")
+                
+            goToMenu = input("\nWould you like to go back to the menu? (y/n): ").strip().lower()
+            if goToMenu in {'y', 'yes'}:
+                break
+            elif goToMenu in {'n', 'no'}:
+                continue
+            
         
     def viewStats(self):
         #Creating the logic for viewing the players stats
