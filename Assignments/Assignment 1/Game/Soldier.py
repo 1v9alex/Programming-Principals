@@ -5,8 +5,7 @@ import time
 #Creating and initalizing the soldier class
 
 '''
-TODO Fix the output of the shop to make it read better
-Add logic for other challenges
+TODO
 Fix prints for the dragon battle to make it read better
 Add dragon attacking to make the battle harder
 '''
@@ -508,21 +507,7 @@ class Soldier:
                 
             self.shopVisited = True
             
-            '''if foundItem:
-                if self.gold >= self.shopItems[itemType][foundItem]:
-                    #deduct the gold from the player and then add the item to the player's inventory
-                    self.gold = self.gold - self.shopItems[itemType][foundItem]
-                    self.items[itemType].append(foundItem)
-                    time.sleep(1)
-                    print(f"You have bought {foundItem} for {self.shopItems[itemType][foundItem]} gold!")
-                    time.sleep(2)
-                    buyMore = input("Would you like to buy another item? (y/n): ").lower()
-                    if buyMore != 'y':
-                        break
-                else:
-                    print("You don't have enough gold!")
-            else:
-                print("Invalid item name. Please type the exact name of the item!")'''
+
             
             
     
@@ -591,3 +576,4 @@ class Soldier:
             
         else:
             print("You have completed all the quests!, You are the new king!")
+            
