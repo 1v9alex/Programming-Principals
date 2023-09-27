@@ -7,7 +7,7 @@ class Soldier:
         #Initializing the attributes of the soldier
         self.name = name
         self.game = game
-        self.gold = 100
+        self.gold = 10
         self.health = 5
         self.damage = 2
         self.armour = 1
@@ -501,6 +501,7 @@ class Soldier:
         #Check if the player is able to visit the shop based on quest completion and if they have already visited the shop
         if self.questsCompletedCount <= 0 or (self.questsCompletedCount <= len(self.challenges) and self.shopVisited):
             print("You cant visit the shop now!")
+            time.sleep(2)
             return
         
         

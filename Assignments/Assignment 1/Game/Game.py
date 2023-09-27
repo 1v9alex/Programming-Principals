@@ -7,6 +7,7 @@ Professor: Muhammad Asif
 '''
 
 from Soldier import Soldier
+from Pickpocket import Pickpocket
 #Creating a game class to handle the game
 class Game:
     def __init__(self):
@@ -35,9 +36,11 @@ class Game:
                 #If the player chooses soldier we create a soldier object
                 self.player = Soldier(playerName,self)
                 break
-            elif roleChoice == 'pickpocket':
+            elif roleChoice == 'pickpocket' or roleChoice == '2':
+                playerName = input("Enter your name:")
                 #If the player chooses pickpocket we create a pickpocket object
-                pass
+                self.player = Pickpocket(playerName,self)
+                break
             elif roleChoice == '3' or roleChoice == 'exit':
                 #If the player chooses exit we exit the game
                 print("Thanks for playing! Exiting game")
