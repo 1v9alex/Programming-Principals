@@ -3,11 +3,7 @@ import string
 import time
 #Creating and initalizing the soldier class
 
-'''
-TODO
-Fix prints for the dragon battle to make it read better
-Add dragon attacking to make the battle harder
-'''
+
 class Soldier:
     def __init__(self, name,game):
         #Initializing the attributes of the soldier
@@ -47,83 +43,77 @@ class Soldier:
         }
         
     def battleDragon(self):
-        #Creating the logic for the first challenge, "Battle your first dragon"
-        print("While returning from a long journey, you encounter a dragon!")
-            
-        dragonHealth = 30
+        print("\nFirst Challenge: Battle your first dragon!")
+        time.sleep(1)
+        print("...")
+        time.sleep(1)
+        print("A dragon appears before you!")
         
-        inBattle = False
+        dragonHealth = 30
+        dragonDamage = 3
+        
+        while True:
+            print("\nYour Health:", self.health)
+            print("Dragon's Health:", dragonHealth)
             
-        while True: #Creating a loop that will run until you choose to battle the dragon
-            if not inBattle:
-                dragonChoice = input("Do you want to battle the dragon? (y/n): ").lower()
-                    
-                if dragonChoice in {'n','no'}:
-                    print("You remember the kings words, \"I became king because I never backed down from a challenge\"")
-                    continue #skips to the next iteration of the loop asking the user again
-                elif dragonChoice not in {'y','yes'}:
-                    print("Invalid Input. Please Enter 'y', 'yes', 'n', or 'no'")
-                    continue #skips to the next iteration of the loop asking the user again
+            actions = ["Attack", "Defend"]
+            
+            print("Available Actions:", ", ".join(actions))
+            choice = input("Choose your action: 1) Attack or 2) Defend: ").lower()
+            time.sleep(1)
+            
+            die1 = random.randint(1, 6)
+            die2 = random.randint(1, 6)
+            numRolled = die1 + die2
+            dragonAttack = dragonDamage + numRolled
+            
+            if choice == '1':
+                print(f"You decide to attack the dragon!, you rolled a {numRolled}")
+                damageDealt = numRolled + self.damage
+                dragonHealth -= max(damageDealt, 0)
                 
-                inBattle = True
-                
-                #Battle logic
-                while self.health > 0 and dragonHealth > 0:
-                    dragonDamage = random.randint(1,6) + random.randint(1,6)
+                if dragonHealth > 0:
+                    time.sleep(1)
+                    print("The dragon retaliates!")
+                    self.health -= max(dragonAttack - self.armour, 0)
                     
-                    print(f"Your health: {self.health}, Dragon's health: {dragonHealth}")
+            elif choice == '2':
+                print("You decide to defend against the dragon!")
+                if dragonAttack > self.armour:
+                    time.sleep(1)
+                    print("The dragon's fire breath is too strong!")
+                    reducedDamage = max(dragonAttack - self.armour, 0)
+                    self.health -= reducedDamage
+                else:
+                    time.sleep(1)
+                    print("You successfully defended against the dragon's attack!")
+            
+            # Check win/lose conditions
+            if dragonHealth <= 0:
+                time.sleep(1)
+                print("You have defeated the dragon!")
+                self.challenges.remove({"name": "Battle your first dragon", "attribute": "damage"})
+                self.damage += 2
+                self.gold += 30
+                print("You have gained 30 gold!")
+                self.questCompleted = True
+                self.shopVisited = False
+                self.questsCompletedCount += 1
+                break
+                
+            elif self.health <= 0:
+                time.sleep(1)
+                print("You have been defeated by the dragon!")
+                retry = input("Would you like to retry? (yes/no): ").lower()
+                if retry == 'yes':
+                    self.health = 50  
+                    dragonHealth = 30
+                    continue
+                else:
+                    time.sleep(1)
+                    print("Thanks for playing! Exiting game")
+                    exit()
 
-                    choice = input("Do you want to 1) Attack or 2) Defend")
-                    die1 = random.randint(1,6)
-                    die2 = random.randint(1,6)
-                    numRolled = die1 + die2
-                    criticalStrike = die1 == die2
-                    
-                    if criticalStrike:
-                        print("Critical Strike!")
-                        
-                    if choice == '1': #Attack
-                        print(f"You decide to attack the dragon!, you rolled a {numRolled}")
-                        dragonAction = random.choice(['dodge', 'defend'])
-                        
-                        if dragonAction == 'dodge':
-                            if numRolled < 6:
-                                print("The Dragon dodged your attack!")
-                            else:
-                                print("You hit the dragon!")
-                                damage = numRolled + (2 if criticalStrike else 0)
-                                dragonHealth -= damage
-                        else:
-                            print("The dragon defended your attack!, You will deal reduced damage")
-                            damage = numRolled + (2 if criticalStrike else 0) - 1
-                            dragonHealth -=  max(damage - dragonHealth, 0)
-                    
-                    elif choice == '2': #Defend
-                        print("You decide to defend against the dragon!")
-                        dragonAttack = random.randint(1,6) + random.randint(1,6)
-                        if dragonAttack > 6:
-                            print("The dragon hit you!")
-                            damage = dragonAttack - self.armour
-                            self.health -= max(damage - self.health, 0)
-                        else:
-                            print("The dragon missed!")
-                            
-                    if dragonHealth <= 0:
-                        print("You have defeated the dragon!")
-                        self.challenges.remove({"name": "Battle your first dragon", "attribute": "damage"})
-                        self.damage += 2
-                        self.gold += 30
-                        print("You have gained 30 gold!")
-                        self.questCompleted = True
-                        self.shopVisited = False
-                        self.questsCompletedCount += 1
-                        break
-                    elif self.health <= 0:
-                        print("You have been defeated by the dragon!")
-                        print("GAME OVER")
-                        break
-                if inBattle:
-                    break
                 
 
     def invadeKingdom(self):
