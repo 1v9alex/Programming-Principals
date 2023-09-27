@@ -106,7 +106,7 @@ class Soldier:
                 print("You have been defeated by the dragon!")
                 retry = input("Would you like to retry? (yes/no): ").lower()
                 if retry == 'yes':
-                    self.health = 50  
+                    self.health = 50
                     dragonHealth = 30
                     continue
                 else:
@@ -318,9 +318,6 @@ class Soldier:
         darkKnightArmour = 8
         darkKnightStamina = 8
         
-
-        
-
         while True:
             print("\nYour Health:", self.health)
             print("Dark Knight's Health:", darkKnightHealth)
@@ -523,10 +520,6 @@ class Soldier:
                 
             self.shopVisited = True
             
-
-            
-            
-    
     def viewInventory(self):
         #Creating the logic for viewing the inventory
         while True:
@@ -556,14 +549,25 @@ class Soldier:
             
         
     def viewStats(self):
-        #Creating the logic for viewing the players stats
-        print("\nYour Stats:")
-        print(f"Name: {self.name}")
-        print(f"Health: {self.health}")
-        print(f"Damage: {self.damage}")
-        print(f"Armour: {self.armour}")
-        print(f"Stamina: {self.stamina}")
-        print(f"Quests Completed: {self.questsCompletedCount}")
+        # Creating the logic for viewing the players stats
+        while True:
+            print("\nYour Stats:")
+            print(f"Name: {self.name}")
+            print(f"Health: {self.health}")
+            print(f"Damage: {self.damage}")
+            print(f"Armour: {self.armour}")
+            print(f"Stamina: {self.stamina}")
+            print(f"Quests Completed: {self.questsCompletedCount}")
+
+            goToMenu = input("\nWould you like to go back to the menu? (y/n): ").strip().lower()
+            if goToMenu in {'y', 'yes'}:
+                break
+            elif goToMenu in {'n', 'no'}:
+                print("Continuing to display stats...")
+                continue
+            else:
+                print("Invalid input. Please enter 'y', 'yes', 'n', or 'no'.")
+
         
 
     def startNextQuest(self):

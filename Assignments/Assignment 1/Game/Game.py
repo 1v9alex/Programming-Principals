@@ -26,7 +26,7 @@ class Game:
     
     def chooseRole(self):
         while True:
-            roleChoice = input("Choose your role: 1) Soldier or 2) Pickpocket?").lower()
+            roleChoice = input("Choose your role: 1) Soldier or 2) Pickpocket? ").lower()
             if roleChoice == 'soldier':
                 playerName = input("Enter your name:")
                 self.player = Soldier(playerName,self)
