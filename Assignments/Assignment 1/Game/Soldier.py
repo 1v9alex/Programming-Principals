@@ -123,102 +123,104 @@ class Soldier:
                         break
                 if inBattle:
                     break
-    
+                
+
     def invadeKingdom(self):
-        print("A fellow solider noticed your fight against that dragon and has tasked you with scouting a nearby kingdom to see if it is weak enough to invade")
-        time.sleep(1)
-        print("You arrive at the kingdom and notice that it is heavily guarded")
-        time.sleep(1)
-        print("You decide to sneak into the kingdom to see if you can find any weaknesses")
-        time.sleep(1)
-        print("You find a weak spot in the wall and decide to sneak in")
-        time.sleep(1)
-        print("Your goal is to not get caught inside the kingdom")
-        time.sleep(1)
-        
-        choice = input("You have two options 1) Sneak in the kingdom and try to kill the king or 2) Call your fellow soldiers to invade the kingdom ")
-        time.sleep(2)
-        
-        die1 = random.randint(1,6)
-        die2 = random.randint(1,6)
-        numRolled = die1 + die2
-        missionComplete = False
-        while self.stamina > 0:
-            print(f"Your stamina: {self.stamina}")
+        while True:
+            choice = ""
             
-            if choice == '1':
-                print("You decide to sneak in the kingdom and try to kill the king")
-                time.sleep(3)
-                print("You Decide to walk around the kingdom to see if you can find the king")
-                time.sleep(3)
-                print("After a sneaking around for a while you manage to make it into the castle")
-                time.sleep(3)
-                print("The castle is heavily guarded you have to sneak around, if you get caught you will be thrown in the dungeon")
-                time.sleep(3)
-                hiddenCheck = random.randint(2,12) + self.stamina
-                
-                if hiddenCheck >= 10:
-                    print("You managed to successfully sneak through the kingdom and assassinate the king, you are now the king!")
-                    missionComplete = True
-                    self.gold += 100
-                    self.stamina += 2
-                    self.damage += 1
-                    self.armour += 2
-                    self.challenges.remove({"name": "Invade your first kingdom", "attribute": "stamina"})
-                    self.questCompleted = True
-                    self.shopVisited = False
-                    self.questsCompletedCount += 1
+            self.stamina = 2
 
-                    return True
+            print("A fellow solider noticed your fight against that dragon and has tasked you with scouting a nearby kingdom to see if it is weak enough to invade")
+            time.sleep(1)
+            print("You arrive at the kingdom and notice that it is heavily guarded")
+            time.sleep(1)
+            print("You decide to sneak into the kingdom to see if you can find any weaknesses")
+            time.sleep(1)
+            print("You find a weak spot in the wall and decide to sneak in")
+            time.sleep(1)
+            print("Your goal is to not get caught inside the kingdom")
+            time.sleep(1)
 
-                else:
-                    print("You Were Spotted! The kings guards are chasing you, you need to run!")
-                    self.stamina -= random.randint(1,3)
-                    if self.stamina <= 0:
-                        print("You were caught and thrown in the dungeon! The Assassination failed!")
-                        return False
-                    else:
-                        print("You managed to escape and hide. But you lost your stamina running")
-            elif choice == '2':
-                print("You decide to call your fellow soldiers to invade the kingdom")
-                battleCheck = random.randint(2,12) + self.stamina
-                
-                if battleCheck >= 10:
-                    print("You fought a hard battle,  you and your soliders manage to take over the kingdom! Victory is yours. ")
-                    missionComplete == True
-                    self.gold += 60
-                    self.stamina += 2
-                    self.damage += 1
-                    self.armour += 2
-                    self.questCompleted = True
-                    self.shopVisited = False
-                    self.challenges.remove({"name": "Invade your first kingdom", "attribute": "stamina"})
-                    self.questsCompletedCount += 1
-
-                    return True
-                else:
-                    print("The kingdom defenses are strong. You and your soliders need to retreat!")
-                    self.stamina -= random.randint(1,3)
-                    if self.stamina <= 0:
-                        print("Your soliders were defeated and you were captured! The invasion failed!")
-                        return False
-                    else:
-                        print("You managed to escape and hide. But you lost your stamina running")
-            else:
-                print("Invalid Input. Please Enter '1' or '2'")
-                
-            if missionComplete:
-                print("You have completed the mission!")
-                return True
-            else:
-                print("You have failed your quest!")
-                break
-        retry = input("You have failed the mission. Would you like to retry? (yes/no): ").lower()
-        if retry != 'yes':
-            print("Thanks for playing! Exiting game")
+            choice = input("You have two options 1) Sneak in the kingdom and try to kill the king or 2) Call your fellow soldiers to invade the kingdom ")
             time.sleep(2)
-            exit()
 
+            die1 = random.randint(1, 6)
+            die2 = random.randint(1, 6)
+            numRolled = die1 + die2
+            missionComplete = False
+
+            while self.stamina > 0:
+                print(f"Your stamina: {self.stamina}")
+
+                if choice == '1':
+                    print("You decide to sneak in the kingdom and try to kill the king")
+                    time.sleep(1)
+                    print("You decide to walk around the kingdom to see if you can find the king")
+                    time.sleep(1)
+                    print("After a sneaking around for a while you manage to make it into the castle")
+                    time.sleep(2)
+                    print("The castle is heavily guarded you have to sneak around, if you get caught you will be thrown in the dungeon")
+                    time.sleep(1)
+                    hiddenCheck = random.randint(2, 12) + self.stamina + numRolled
+
+                    if hiddenCheck >= 10:
+                        print("You managed to successfully sneak through the kingdom and assassinate the king, you are now the king!")
+                        missionComplete = True
+                        self.gold += 100
+                        self.stamina += 2
+                        self.damage += 1
+                        self.armour += 2
+                        self.challenges.remove({"name": "Invade your first kingdom", "attribute": "stamina"})
+                        self.questCompleted = True
+                        self.shopVisited = False
+                        self.questsCompletedCount += 1
+                        return True
+                    else:
+                        print("You Were Spotted! The kings guards are chasing you, you need to run!")
+                        self.stamina -= random.randint(1, 3)
+                        if self.stamina <= 0:
+                            print("You were caught and thrown in the dungeon! The Assassination failed!")
+                            break  # Exiting the inner while loop
+                        else:
+                            print("You managed to escape and hide. But you lost your stamina running")
+
+                elif choice == '2':
+                    print("You decide to call your fellow soldiers to invade the kingdom")
+                    battleCheck = random.randint(2, 12) + self.stamina + numRolled
+
+                    if battleCheck >= 10:
+                        print("You fought a hard battle, you and your soldiers manage to take over the kingdom! Victory is yours.")
+                        missionComplete = True
+                        self.gold += 60
+                        self.stamina += 2
+                        self.damage += 1
+                        self.armour += 2
+                        self.challenges.remove({"name": "Invade your first kingdom", "attribute": "stamina"})
+                        self.questCompleted = True
+                        self.shopVisited = False
+                        self.questsCompletedCount += 1
+                        return True
+                    else:
+                        print("The kingdom defenses are strong. You and your soldiers need to retreat!")
+                        self.stamina -= random.randint(1, 3)
+                        if self.stamina <= 0:
+                            print("Your soldiers were defeated and you were captured! The invasion failed!")
+                            break  # Exiting the inner while loop
+                        else:
+                            print("You managed to escape and hide. But you lost your stamina running")
+
+                else:
+                    print("Invalid Input. Please Enter '1' or '2'")
+
+            # If mission was not completed and stamina <= 0
+            print("You have failed your quest!")
+            retry = input("You have failed the mission. Would you like to retry? (yes/no): ").lower()
+            if retry != 'yes':
+                print("Thanks for playing! Exiting game")
+                time.sleep(2)
+                exit()
+                
     def overthrowKing(self):
         print("Now that you have your own kingdom, its time to overthrow the evil king from your old kingdom!")
         time.sleep(2)
