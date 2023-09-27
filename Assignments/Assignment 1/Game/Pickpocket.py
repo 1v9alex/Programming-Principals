@@ -22,7 +22,7 @@ class Pickpocket:
         self.inventoryDetails = {"Tools": [], "Utility": []}
         
         #Dictionary of items that the shop has for the pickpocket
-        self.item_shop = {
+        self.shopItems = {
             "Tools": {
                 "Developer Item": {"cost": 10000, "stats": {"stealth": 100000, "luck": 100000, "speed": 100000, "health": 100000}},
                 "Lockpicking Kit": {"cost": 50, "stats": {"stealth": 2, "luck": 1}}, "Extendo Arm": {"cost": 100, "stats":{"stealth": 12,"luck": 1, "speed": 5}},
@@ -40,14 +40,149 @@ class Pickpocket:
         
         #Challenges that the pickpocket has to complete
         self.challenges = [
-            {"name": "Commit your first robbery","attribute": "stealth"},
+            {"name": "Commit your first robbery","attribute": "luck"},
             {"name": "Museum Robbery","attribute": "speed"},
-            {"name": "Royal Relic Robbery","attribute": "luck"},
+            {"name": "Royal Relic Robbery","attribute": "stealth"},
             {"name": "Steal The Kings Crown","attribute": "stealth"},
         ]
-        
+    
+    #Creating the function for the first challenge/quest
     def stealFromPasserby(self):
-        return True
+        #Dictionary of victims that the pickpocket can steal from along with the item name, difficulty, and value
+        victims = {
+            "Blacksmith": {"item": "Newly Forged Iron Sword", "difficulty": 5, "value": 20},
+            "Working Man": {"item": "Sack Of Gold Coins", "difficulty": 5, "value": 15},
+            "Mage": {"item": "Ancient Scroll", "difficulty": 7, "value": 40},
+            "Princess": {"item": "Diamond Necklace", "difficulty": 10, "value": 120},
+            "Priest": {"item": "Cleansing Scepter", "difficulty": 9, "value": 60},
+        }
+        #Initializing the total gold value and stat increment for the items stolen
+        totalGoldValue = 0
+        statIncrement = 1
+        
+        #Main loop for stealing
+        while True:
+            #Printing available victims
+            time.sleep(1)
+            print("\nYou find yourself in a crowded market, your eyes are scanning for potential victims...")
+            
+            for i, (victim, info) in enumerate(victims.items(), 1):
+                time.sleep(1)
+                print(f"{i}. {victim} with {info['item']}")
+                
+            time.sleep(1)
+            #Asking the user to choose a victim
+            choice = input("Who will you attempt to steal from? (Enter a number 1-5 or 'exit' to exit) ")
+            time.sleep(1)
+            
+            if choice.lower() == 'exit':
+                #Exit the challenge if the player chooses exit
+                time.sleep(1)
+                print("You decide to leave the market...\nMaybe you will come back later")
+                time.sleep(1)
+                exit()
+            #Validating the users input
+            if not (choice.isdigit() and 1 <= int(choice) <= len(victims)):
+                print("Invalid choice!")
+                continue
+            #Getting the chosen victim and difficulty level
+            victim = list(victims.keys())[int(choice) - 1]
+            difficulty = victims[victim]["difficulty"]
+            
+            #Asking the user how they would like to attempt the robbery
+            time.sleep(1)
+            print("\nHow would you like to approach this?")
+            time.sleep(1)
+            print("1. Distract the victim and then steal the item")
+            time.sleep(1)
+            print("2. Try to steal the item quietly without the victim noticing")
+            time.sleep(1)
+            print("3. Try to steal the item quickly and run away")
+            time.sleep(1)
+            approachChoice = input("Enter your choice (1-3): ")
+            time.sleep(1)
+            
+            #Modifying diffuclty based on the users choice and then printing the corresponding message
+            if approachChoice == '1':
+                difficulty -= self.luck // 10
+                time.sleep(1)
+                print("You try to distract the victim...")
+            elif approachChoice == '2':
+                difficulty -= self.stealth // 10
+                time.sleep(1)
+                print("You try to steal the item quietly...")
+            elif approachChoice == '3':
+                difficulty -= self.speed // 10
+                time.sleep(1)
+                print("You try to snatch the item quickly and run away...")
+            else:
+                #Continuing the loop if the user enters an invalid choice
+                print("Invalid choice!")
+                continue
+            #Roll dice to determine the sucess of the robbery
+            numRolled = random.randint(1, 6) + random.randint(1, 6)
+            
+            itemName = victims[victim]['item']  # Store item name before deleting
+            if numRolled + self.stealth // 10 >= difficulty:
+                time.sleep(1)
+                print(f"Success! You stole {itemName} from {victim}!")
+                totalGoldValue += victims[victim]["value"]
+                del victims[victim]
+
+                # Incrementing the stats after successfully stealing
+                self.luck += statIncrement
+                self.stealth += statIncrement
+                self.speed += statIncrement
+                statIncrement += 1
+
+                if len(victims) == 0:
+                    #End the stealing process if the user has successfully stolen from all the victims
+                    time.sleep(1)
+                    print("One by one, you've stolen all the victims belongings!")
+                    break
+
+                #Giving the player the option to continue or run away
+                time.sleep(1)
+                print("Nobody noticed you stealing the item! You still feel the adrenaline pumping within you!")
+                time.sleep(1)
+                action = input("Press 'r' to run away or any other key to continue: ")
+                if action.lower() == 'r':
+                    #Exit the stealing loop if the player chooses to run away
+                    time.sleep(1)
+                    print("...")
+                    time.sleep(1)
+                    print("You run away from the market")
+                    break
+            else:
+                #Handling the case where the player fails to steal from the victim
+                time.sleep(1)
+                print(f"You were Caught! The {victim} noticed your attempt to steal the {itemName}!")
+                time.sleep(1)
+                retry = input("Your heart is racing! Will you try again? (yes/no): ").lower()
+                if retry != 'yes':
+                    time.sleep(1)
+                    print("You decide it’s time to give up on your criminal desires.")
+                    exit()
+        time.sleep(1)
+        #Updating the players gold and stats after stealing
+        print(f"Having escaped, you find that your loot is worth {totalGoldValue} gold!")
+        self.gold += totalGoldValue
+        time.sleep(1)
+        print(f"You gained {totalGoldValue} gold!")
+        self.luck += 2
+        self.stealth += 1
+        self.speed += 1
+        self.challenges.remove({"name": "Commit your first robbery", "attribute": "luck"})
+        self.questCompleted = True
+        self.shopVisited = False
+        self.questsCompletedCount += 1
+
+        
+            
+            
+            
+            
+            
     
     def stealFromMuseum(self):
         return True

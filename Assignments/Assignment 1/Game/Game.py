@@ -30,7 +30,7 @@ class Game:
     def chooseRole(self):
         #Loop until the players makes a valid choice
         while True:
-            roleChoice = input("Choose your role: 1) Soldier, 2) Pickpocket or 3) exit? ").lower()
+            roleChoice = input("Choose your role: 1) Soldier, 2) Pickpocket or 3) Exit? ").lower()
             if roleChoice == 'soldier' or roleChoice == '1':
                 playerName = input("Enter your name:")
                 #If the player chooses soldier we create a soldier object
