@@ -1,7 +1,6 @@
 import random
 import string
 import time
-
 #Creating and initalizing the soldier class
 
 '''
@@ -10,11 +9,12 @@ Fix prints for the dragon battle to make it read better
 Add dragon attacking to make the battle harder
 '''
 class Soldier:
-    def __init__(self, name):
+    def __init__(self, name,game):
         #Initializing the attributes of the soldier
         self.name = name
+        self.game = game
         self.gold = 100
-        self.health = 50
+        self.health = 5
         self.damage = 2
         self.armour = 1
         self.stamina = 2
@@ -35,6 +35,7 @@ class Soldier:
         #Dictionary of items that the shop has for the soldier role
         self.shopItems = {
             "Offensive": {
+                "Developer Item" : {"cost": 10000,"stats": {"damage": 100000,"stamina": 100000, "armour": 1000000,"health": 1000000}},
                 "Dragon's Tooth": {"cost": 10, "stats": {"damage": 3, "stamina": 1}}, "Excalibur": {"cost": 100, "stats": {"damage":15,"health":10}},
                 "Blade Of Steel": {"cost": 5, "stats": {"damage": 2}}, "Holy Sword": {"cost": 100, "stats": {"damage": 10, "health": 10, "armour": 5,"stamina": 2}},
                 "Blade Of The Fallen": {"cost": 50, "stats":{"damage": 5,"health": 5, "armour": 3}}, "Long Sword": {"cost": 30, "stats": {"damage": 4}},
@@ -340,6 +341,7 @@ class Soldier:
             
             print("Available Actions:", ", ".join(actions))
             choice = input("Choose your action: 1) Attack or 2) Defend or 3) Special Attack: ").lower()
+            time.sleep(1)
             
             
             die1 = random.randint(1,6)
@@ -349,82 +351,103 @@ class Soldier:
                         
             if choice == '1': #Attack Logic
                 if numRolled + self.stamina > darkKnightArmour:
+                    time.sleep(1)
                     print("You pierce through the Dark Knight's armour and deal damage!")
                     damageDealt = numRolled + self.damage - darkKnightArmour
                     darkKnightHealth -= max(damageDealt, 0)
                     darkKnightArmour = max(darkKnightArmour - 1, 0)
                 else:
+                    time.sleep(1)
                     print("The Dark Knight's armour is too strong, he blocked your attack!")
                 
                 #Dark Knight's attack
                 if darkKnightAttack > self.armour:
+                    time.sleep(1)
                     print("The Dark Knight strikes back and you take damage!")
                     self.health -= max(darkKnightAttack - self.armour + darkKnightDamage, 0)
                     
             elif choice == '2': #Defend logic
+                time.sleep(1)
                 print("You decide to defend against the Dark Knight's attack!")
                 darkKnightAttack = random.randint(2,12)
                 if darkKnightAttack > self.armour:
+                    time.sleep(1)
                     print("The Dark Knight pierces through your defense!")
                     reducedDamage = max(darkKnightAttack - self.armour - numRolled,0)
                     self.health -= reducedDamage
                 else:
+                    time.sleep(1)
                     print("You successfully defended against the Dark Knight's attack!")
             
             elif choice == '3' and "Special Attack" in actions:
+                time.sleep(1)
                 print("You used your most powerful attack!")
                 if self.stamina >= 10:
                     #Charge attack if high stamina
+                    time.sleep(1)
                     print("You charge at the Dark Knight with immense power!")
                     darkKnightHealth -= self.damage + 1 + numRolled
                 
                 elif self.armour >= 10:
                     #High armour you will do a shield attack
+                    time.sleep(1)
                     print("You use your shield to attack the Dark Knight lowering his armour!")
                     darkKnightArmour = max(darkKnightArmour - numRolled, 0)
                 else:
+                    time.sleep(1)
                     print("Your special move fails!")
                     
             #Dark knights turn
             if darkKnightHealth > 0:
                 if self.damage >= 10:
+                    time.sleep(1)
                     print("The Dark knight focuses on defending and countering!")
                     
                     #Counter/Parry Logic
                     counterAttack = random.randint(2,12)
                     if counterAttack > self.armour:
+                        time.sleep(1)
                         print("The Dark Knight counters your attack!")
                         self.health -= max(counterAttack - self.armour + darkKnightDamage, 0)
                     else:
+                        time.sleep(1)
                         print("You successfully defended against the Dark Knight's counter attack!")
                 else:
+                    time.sleep(1)
                     print("The Dark Knight attacks!")
                     
                     #Dark Knight's attack LOGIC
                     darkKnightAttack = random.randint(2,12)
                     if darkKnightAttack > self.armour:
+                        time.sleep(1)
                         print("The Dark Knight strikes back and you take damage!")
                         self.health -= max(darkKnightAttack - self.armour + darkKnightDamage, 0)
                     else:
+                        time.sleep(1)
                         print("You successfully defended against the Dark Knight's attack!")
             # Check win/lose conditions
             if darkKnightHealth <= 0:
+                time.sleep(1)
                 print("You have defeated the Dark Knight!")
+                time.sleep(1)
                 print("Congratulations! You now rule the kingdom!")
-                
+                time.sleep(1)
                 # Ask the player if they want to restart the game or exit
                 restart = input("Would you like to restart the game and choose a different role? (yes/no): ").lower()
                 if restart == 'yes':
                     print("CODE LOGIC FOR RESTARTING GAME")
                     # Restart the game
-                    #TODO CODE LOGIC FOR STARTING GAME
+                    self.game.chooseRole()
                 else:
+                    time.sleep(1)
                     print("Thanks for playing! Exiting game")
+                    time.sleep(1)
                     exit()
                     
             elif self.health <= 0:
+                time.sleep(1)
                 print("You have been defeated by the Dark Knight!")
-                
+                time.sleep(1)
                 # Ask the player if they want to retry or exit
                 retry = input("Would you like to retry? (yes/no): ").lower()
                 if retry == 'yes':
@@ -433,6 +456,7 @@ class Soldier:
                     darkKnightHealth = 50
                     continue
                 else:
+                    time.sleep(1)
                     print("Thanks for playing! Exiting game")
                     exit()
                             
@@ -572,7 +596,7 @@ class Soldier:
                 self.becomeKing()
                 
             
-            #Update questsCompleteCount and reseting the value of shopVisited after completing a quest
+            #Update questsCompleteCount and resetting the value of shopVisited after completing a quest
             self.questsCompletedCount += 1
             self.shopVisited = False
             

@@ -6,8 +6,7 @@ Student Number: 991728593
 Professor: Muhammad Asif
 '''
 
-import random
-import string
+
 
 
 from Soldier import Soldier
@@ -30,7 +29,7 @@ class Game:
             roleChoice = input("Choose your role: 1) Soldier or 2) Pickpocket?").lower()
             if roleChoice == 'soldier':
                 playerName = input("Enter your name:")
-                self.player = Soldier(playerName)
+                self.player = Soldier(playerName,self)
                 break
             elif roleChoice == 'pickpocket':
                 # implement after soldier is done
