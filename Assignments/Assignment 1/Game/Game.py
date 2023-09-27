@@ -7,7 +7,7 @@ Professor: Muhammad Asif
 '''
 
 from Soldier import Soldier
-
+#Creating a game class to handle the game
 class Game:
     def __init__(self):
         #Initializing the player to None
