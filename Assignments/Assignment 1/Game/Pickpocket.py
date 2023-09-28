@@ -643,7 +643,7 @@ class Pickpocket:
             else:
                 print("You do not have any Utility items.")
             #Asking the user if they want to go back to the menu
-            goToMenu = input("\nWould you like to go back to the menu? (y/n): ").strip().lower()
+            goToMenu = input("\nWould you like to go back to the menu? (yes/no): ").strip().lower()
             if goToMenu in {'y', 'yes'}:
                 break
             elif goToMenu in {'n', 'no'}:
@@ -661,7 +661,7 @@ class Pickpocket:
             print(f"Speed: {self.speed}")
             print(f"Quests Completed: {self.questsCompletedCount}")
             #Asking the player if they want to go back to the menu
-            goToMenu = input("\nWould you like to go back to the menu? (y/n): ").strip().lower()
+            goToMenu = input("\nWould you like to go back to the menu? (yes/no): ").strip().lower()
             if goToMenu in {'y', 'yes'}:
                 break
             elif goToMenu in {'n', 'no'}:

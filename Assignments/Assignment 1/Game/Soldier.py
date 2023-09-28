@@ -8,7 +8,7 @@ class Soldier:
         self.name = name
         self.game = game
         self.gold = 10
-        self.health = 5
+        self.health = 50
         self.damage = 2
         self.armour = 1
         self.stamina = 2
@@ -501,7 +501,7 @@ class Soldier:
         #Check if the player is able to visit the shop based on quest completion and if they have already visited the shop
         if self.questsCompletedCount <= 0 or (self.questsCompletedCount <= len(self.challenges) and self.shopVisited):
             print("You cant visit the shop now!")
-            time.sleep(2)
+            time
             return
         
         
@@ -595,7 +595,7 @@ class Soldier:
             else:
                 print("You do not have any defensive items.")
             #Asking the user if they want to go back to the menu
-            goToMenu = input("\nWould you like to go back to the menu? (y/n): ").strip().lower()
+            goToMenu = input("\nWould you like to go back to the menu? (yes/no): ").strip().lower()
             if goToMenu in {'y', 'yes'}:
                 break
             elif goToMenu in {'n', 'no'}:
@@ -613,7 +613,7 @@ class Soldier:
             print(f"Stamina: {self.stamina}")
             print(f"Quests Completed: {self.questsCompletedCount}")
             #Asking the player if they want to go back to the menu
-            goToMenu = input("\nWould you like to go back to the menu? (y/n): ").strip().lower()
+            goToMenu = input("\nWould you like to go back to the menu? (yes/no): ").strip().lower()
             if goToMenu in {'y', 'yes'}:
                 break
             elif goToMenu in {'n', 'no'}:
