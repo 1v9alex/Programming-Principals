@@ -19,7 +19,7 @@ class Pickpocket:
         
         #Dictionary Of Items that the Pickpocket has
         self.items = {"Tools": [], "Utility": []}
-        self.inventoryDetails = {"Tools": [], "Utility": []}
+        self.inventoryDetails = {"Tools": {}, "Utility": {}}
         
         #Dictionary of items that the shop has for the pickpocket
         self.shopItems = {
@@ -434,7 +434,7 @@ class Pickpocket:
                 #Giving the player the option to leave the kingdom or to stay and try to steal the Kings Crown
                 print("You realise now that you've stolen the Queens Scepter you will have to leave the kingdom")
                 time.sleep(1)
-                print("Will you decide to leave the kingdom and start a new life? or will you stay and try to steal the Kings Crown?")
+                print("Will you decide to 1) Leave the kingdom and start a new life? or 2) Will you stay and try to steal the Kings Crown?")
                 time.sleep(1)
                 actionChoice = input("Enter your choice (1-2): ")
                 if actionChoice == '1':
