@@ -300,10 +300,166 @@ class Pickpocket:
                     return True
                 
         
-    
+    #Creating the function for the third challenge
     def royalRelicRobbery(self):
-        return True
-    
+        time.sleep(1)
+        #Quest/challenge introduction
+        print("\nYou find yourself inside the King's Castle, with your eyes set on the Queen's Golden Scepter")
+        time.sleep(1)
+        #Setting the initial difficulty based on the players stealth stat
+        difficulty = 20 - (self.stealth // 10)
+        
+        #Main quest challenge loop
+        while True:
+            time.sleep(1)
+            print("\nYou're exploring the castle through the secret passageways, trying to find the Queen's room...")
+            time.sleep(1)
+            
+            #Giving player different paths to choose
+            print("You come across a three way divide in the passageway, which path will you take?")
+            time.sleep(1)
+            print("1. The left path which is dimly lit")
+            time.sleep(1)
+            print("2. The middle path which is brightly lit")
+            time.sleep(1)
+            print("3. The right path which is pitch black")
+            time.sleep(1)
+            pathChoice = input("Enter your choice (1-3): ")
+            time.sleep(1)
+            #Scenario for the left path
+            if pathChoice == '1':
+                time.sleep(1)
+                print("You take the left path")
+                time.sleep(1)
+                print("...")
+                time.sleep(1)
+                print("You hear a sound, someone is coming. There is a door to your right, what will you do?")
+                time.sleep(1)
+                print("1. Hide in the room")
+                time.sleep(1)
+                print("2. Continue Walking and attempt to fool the person")
+                time.sleep(1)
+                actionChoice = input("Enter your choice (1-2): ")
+                #Based on the action modify the difficulty or stats (or both) of the player and mission
+                if actionChoice == '1':
+                    time.sleep(1)
+                    print("You hide in the room. It was just the royal maid who was passing by without entering the room")
+                    difficulty -= 1
+                elif actionChoice == '2':
+                    time.sleep(1)
+                    print("You continue walking The person walking was just a cook he didn't notice you")
+                    self.stealth += 2
+                else:
+                    print("Invalid choice!")
+                    continue
+                #Scenario for the middle path
+            elif pathChoice == '2':
+                time.sleep(1)
+                print("You take the brightly lit middle path")
+                time.sleep(1)
+                print("...")
+                time.sleep(1)
+                print("You hear guards in the distance this is going to be risky")
+                time.sleep(1)
+                difficulty += 4
+                time.sleep(1)
+                print("You see a guard approaching you, what will you do?")
+                time.sleep(1)
+                print("1. Hide under some furniture")
+                time.sleep(1)
+                print("2. Try to quietly knock him out")
+                time.sleep(1)
+                actionChoice = input("Enter your choice (1-2): ")
+                if actionChoice == '1':
+                    time.sleep(1)
+                    print("You hide under a table, the guard didn't notice you")
+                    difficulty -= 2
+                    self.stealth += 2
+                elif actionChoice == '2':
+                    time.sleep(1)
+                    print("You try to knock him out, but he notices you and calls for backup")
+                    time.sleep(1)
+                    print("You are caught and thrown into the dungeon")
+                    time.sleep(1)
+                    retry = input("Challenge Failed! Will you try again? (yes/no): ").lower()
+                    if retry != 'yes':
+                        time.sleep(1)
+                        print("You decide it’s time to give up on crime")
+                        exit()
+                else:
+                    print("Invalid choice!")
+                    continue
+                #Scenario for the right path
+            elif pathChoice == '3':
+                time.sleep(1)
+                print("You take the pitch black right path, its safer but who knows whats in there")
+                difficulty -= 2
+                time.sleep(1)
+                print("You trip on something, it's a sleeping guard dog, what will you do?")
+                time.sleep(1)
+                print("1. Try to sneak past it")
+                time.sleep(1)
+                print("2. Distract it with a piece of meat")
+                time.sleep(1)
+                actionChoice = input("Enter your choice (1-2): ")
+                if actionChoice == '1':
+                    time.sleep(1)
+                    print("You sneak past the dog, it didnt wave up. You continue walking")
+                    self.stealth += 2
+                    self.luck += 1
+                elif actionChoice == '2':
+                    time.sleep(1)
+                    print("You distract the dog with a piece of meat, it eats the meat and you continue walking")
+                    self.luck += 2
+                    self.stealth += 1
+                else:
+                    print("Invalid choice!")
+                    continue
+            #Rolling the dice to determine the players success
+            numRolled = random.randint(1, 6) + random.randint(1, 6)
+            escapeDifficulty = difficulty - (self.speed // 10)
+            #Comparing the roll to the escape difficulty to see if the player was successful
+            if numRolled >= escapeDifficulty:
+                #Handling the case where the player successfully steals the Queens Scepter
+                time.sleep(1)
+                print("You found the Queen's room, you manages to secure the Queen's Golden Scepter!")
+                self.challenges.remove({"name": "Royal Relic Robbery", "attribute": "stealth"})
+                self.questCompleted = True
+                self.shopVisited = False
+                self.questsCompletedCount += 1
+                self.luck += 2
+                self.stealth += 2
+                self.speed += 2
+                time.sleep(1)
+                #Giving the player the option to leave the kingdom or to stay and try to steal the Kings Crown
+                print("You realise now that you've stolen the Queens Scepter you will have to leave the kingdom")
+                time.sleep(1)
+                print("Will you decide to leave the kingdom and start a new life? or will you stay and try to steal the Kings Crown?")
+                time.sleep(1)
+                actionChoice = input("Enter your choice (1-2): ")
+                if actionChoice == '1':
+                    time.sleep(1)
+                    print("You decide to leave the kingdom and start a new life")
+                    time.sleep(1)
+                    print("You have completed all the quests!, You started a new life in the rival kingdom and bought your way to power! You are the new king!")
+                    time.sleep(2)
+                    exit()
+                elif actionChoice == '2':
+                    time.sleep(1)
+                    print("You decide to stay and try to steal the Kings Crown")
+                    self.stealKingsCrown()
+                return True
+            else:
+                #Handling the case where the player fails to steal the Queens Scepter
+                time.sleep(1)
+                print("You were Caught! The Guards Caught you and threw you into the dungeon where you will wait to be executed!")
+                time.sleep(1)
+                retry = input("Challenge Failed! Will you try again? (yes/no): ").lower()
+                if retry != 'yes':
+                    time.sleep(1)
+                    print("You decide it’s time to give up on crime")
+                    exit()
+
     def stealKingsCrown(self):
         return True
     
