@@ -5,7 +5,7 @@ Author: Alexander Gasee
 Student Number: 991728593
 Professor: Muhammad Asif
 '''
-
+import time
 from Soldier import Soldier
 from Pickpocket import Pickpocket
 #Creating a game class to handle the game
