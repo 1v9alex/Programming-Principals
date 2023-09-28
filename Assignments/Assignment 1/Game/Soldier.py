@@ -571,6 +571,7 @@ class Soldier:
                 print("Invalid item name. Please type the exact name of the item!")
             #Setting the shop as visited after the player exits the shop
             self.shopVisited = True
+            
     #Creating the function for viewing the players inventory
     def viewInventory(self):
         #Display the players inventory until the player decides to go back to the menu
