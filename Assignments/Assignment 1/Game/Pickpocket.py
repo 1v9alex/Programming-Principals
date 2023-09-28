@@ -459,9 +459,91 @@ class Pickpocket:
                     time.sleep(1)
                     print("You decide it’s time to give up on crime")
                     exit()
-
+                    
+    #Creating the function for the fourth and final challenge
     def stealKingsCrown(self):
-        return True
+        time.sleep(1)
+        print("\nYou decided to stay and try to steal the Kings Crown!")
+        time.sleep(1)
+        print("You put the queens scepter in your bag and continue walking, the King's Crown is in the throne room")
+        time.sleep(1)
+        #Setting the initial difficulty based on the players stealth stat
+        difficulty = 25 - (self.stealth // 10)
+        
+        #Main challenge loop
+        while True:
+            time.sleep(1)
+            print("\nThe throne room is heavily guarded, but the crowns bright glow is calling you")
+            time.sleep(1)
+            #Giving the player different options to choose from on how to approach this heist
+            print("How will you approach this?")
+            time.sleep(1)
+            print("1. Try to sneak past the guards")
+            time.sleep(1)
+            print("2. Create a distraction outside the throne room")
+            time.sleep(1)
+            print("3. Disguise as the royal jester to get closer to the crown")
+            time.sleep(1)
+            
+            approachChoice = input("Enter your choice (1-3): ")
+            time.sleep(1)
+            
+            #Modifying the difficulty based on the players choice
+            if approachChoice == '1':
+                time.sleep(1)
+                print("You try to sneak past the guards")
+                difficulty -= 2
+            elif approachChoice == '2':
+                time.sleep(1)
+                print("You create a loud noise outside of the throne room")
+                difficulty += 3
+            elif approachChoice == '3':
+                time.sleep(1)
+                print("You disguise as the royal jester to get closer to the crown")
+                time.sleep(1)
+                print("...")
+                time.sleep(1)
+                print("Nobody suspects a thing, you are now in the throne room")
+                time.sleep(1)
+                difficulty -= 3
+            else:
+                print("Invalid choice!")
+                continue
+            
+            #Rolling the dice to determine the players success
+            numRolled = random.randint(1, 6) + random.randint(1, 6)
+            escapeDifficulty = difficulty - (self.speed // 10)
+            
+            if numRolled+self.stealth >= escapeDifficulty:
+                #Handling the case where the player successfully steals the Kings Crown
+                time.sleep(1)
+                print("You found the Kings Crown, you manages to secure the Kings Crown!")
+                self.challenges.remove({"name": "Steal The Kings Crown", "attribute": "stealth"})
+                self.questCompleted = True
+                self.shopVisited = False
+                self.questsCompletedCount += 1
+                self.luck += 2
+                self.stealth += 2
+                self.speed += 2
+                time.sleep(1)
+                print("You have completed all the quests!, The guards see you stole the crown which means you are the new ruler of the kingdom!")
+                time.sleep(2)
+                print("You are the new king!")
+                time.sleep(2)
+                print("You banish the old king to the dungenon and have a prosperous rule!")
+                time.sleep(2)
+                exit()
+            else:
+                #Handling the case where the player fails to steal the Kings Crown
+                time.sleep(1)
+                print("You were Caught! The Guards Caught you and threw you into the dungeon where you will wait to be executed!")
+                time.sleep(1)
+                retry = input("Challenge Failed! Will you try again? (yes/no): ").lower()
+                if retry != 'yes':
+                    time.sleep(1)
+                    print("You decide it’s time to give up on crime")
+                    exit()
+            
     
     #Creating the function for the item shop
     def visitShop(self):
