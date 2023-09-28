@@ -25,7 +25,7 @@ class Pickpocket:
         self.shopItems = {
             "Tools": {
                 "Developer Item": {"cost": 10000, "stats": {"stealth": 100000, "luck": 100000, "speed": 100000, "health": 100000}},
-                "Lockpicking Kit": {"cost": 50, "stats": {"stealth": 2, "luck": 1}}, "Extendo Arm": {"cost": 100, "stats":{"stealth": 12,"luck": 1, "speed": 5}},
+                "Lockpicking Kit": {"cost": 50, "stats": {"stealth": 2, "luck": 1}}, "Extendo Arm": {"cost": 200, "stats":{"stealth": 12,"luck": 5, "speed": 5}},
                 "Alien X-Ray Scanner": {"cost": 150, "stats": {"stealth": -1, "luck": 20, "speed": 10}}, "Silent Wrench": {"cost": 60, "stats": {"stealth": 5, "luck": 1, "speed": 2}},
                 
             },
@@ -183,9 +183,123 @@ class Pickpocket:
             
             
             
-    
+    #Creating the function for the second quest
     def stealFromMuseum(self):
-        return True
+        time.sleep(1)
+        print("\nYou find yourself in front of the Royal Museum, known for its precious artifacts stolen from other kingdoms.")
+        #Dictionary of artifacts that the pickpocket can steal from along with the difficulty and value
+        artifacts = {
+            "The Dark Knights Shield": {"difficulty": 6, "value": 100},
+            "The Holy Grail": {"difficulty": 10, "value": 300},
+            "The Crown Jewels": {"difficulty": 8, "value": 200},
+            "The Prophecy": {"difficulty": 15, "value": 500},
+            "The Golden Chalice": {"difficulty": 12, "value": 400},
+            "The Saviours Pendant": {"difficulty": 20, "value": 1000},
+        }
+        
+        #Rolling  dice to determine the players escape change
+        numRolled = random.randint(1, 6) + random.randint(1, 6)
+        
+        #Displaying the artifacts that the player can steal
+        time.sleep(1)
+        print("The artifacts you can attempt to steal are:")
+        for i, (name, info) in enumerate(artifacts.items(), 1):
+            time.sleep(1)
+            print(f"{i}. {name} - Value: {info['value']} gold")
+        #Loop to continusly ask the player which artifact they want to steal
+        while True:
+            time.sleep(1)
+            choice = input("Which artifact will you attempt to steal? (Enter a number 1-6 or 'exit' to exit) ")
+            #Allowing the player to exit the choice loop and end the game
+            if choice.lower() == 'exit':
+                time.sleep(1)
+                print("You decide to leave the museum...")
+                time.sleep(1)
+                print("Maybe you will come back later")
+                time.sleep(1)
+                exit()
+            #Checking if the players input is valid
+            if not (choice.isdigit() and 1 <= int(choice) <= len(artifacts)):
+                print("Invalid choice!")
+                continue
+            
+            #Get the chosen artifact details
+            artifactName = list(artifacts.keys())[int(choice) - 1]
+            artifact = artifacts[artifactName]
+            time.sleep(1)
+            #Displaying the players choice
+            print(f"You attempt to steal {artifactName}")
+            time.sleep(1)
+            
+            #Loop to ask the player how they want to approach the robbery
+            while True:
+                #Modifying the difficulty based on the players choice
+                escapeDifficulty = artifact["difficulty"] - (self.speed // 10)
+                
+                #Displaying all the different approaches the player can take for the robbery
+                time.sleep(1)
+                print("\nHow would you like to approach this?")
+                time.sleep(1)
+                print("1. Try to grab the artifact quickly and escape")
+                time.sleep(1)
+                print("2. Use your tools and try to disable the security system and take the artifact")
+                time.sleep(1)
+                print("3. Try to distract the guards and then steal the artifact")
+                time.sleep(1)
+                
+                approachChoice = input("Enter your choice (1-3): ")
+                time.sleep(1)
+                
+                #Adjust the escape difficulty based on the players choice
+                if approachChoice == '1':
+                    escapeDifficulty -= self.stealth // 10
+                    time.sleep(1)
+                    print("You try to grab the artifact quickly and escape...")
+                elif approachChoice == '2':
+                    escapeDifficulty += 1
+                    time.sleep(1)
+                    print("You attempt to disable the security systems...")
+                elif approachChoice == '3':
+                    escapeDifficulty -= 1
+                    time.sleep(1)
+                    print("You try to distract the guards...")
+                else:
+                    print("Invalid choice!")
+                    continue
+                
+                time.sleep(1)
+                
+                #Checking if the players roll is less than or equal to the escape difficulty
+                if numRolled <= escapeDifficulty:
+                    time.sleep(1)
+                    #Handling the case where the player fails to steal the artifact
+                    print("You were Caught! The Guards Caught you")
+                    time.sleep(1)
+                    print("You were thrown into the dungeon")
+                    time.sleep(1)
+                    retry = input("Your heart is racing! Will you try again? (yes/no): ").lower()
+                    if retry != 'yes':
+                        time.sleep(1)
+                        print("You decide it’s time to give up on crime")
+                        exit()
+                else:
+                    #Handling the case where the player successfully steals the artifact
+                    print(f"Success! You stole {artifactName} and escaped the museum undetected!")
+                    time.sleep(1)
+                    print(f"You quickly sell the artifact for {artifact['value']} gold!")
+                    self.gold += artifact["value"]
+                    time.sleep(1)
+                    print(f"You gained {artifact['value']} gold!")
+                    self.luck += 2
+                    self.stealth += 1
+                    self.speed += 4
+                    self.challenges.remove({"name": "Museum Robbery", "attribute": "speed"})
+                    self.questCompleted = True
+                    self.shopVisited = False
+                    self.questsCompletedCount += 1
+                    return True
+                
+        
     
     def royalRelicRobbery(self):
         return True
