@@ -501,7 +501,7 @@ class Soldier:
         #Check if the player is able to visit the shop based on quest completion and if they have already visited the shop
         if self.questsCompletedCount <= 0 or (self.questsCompletedCount <= len(self.challenges) and self.shopVisited):
             print("You cant visit the shop now!")
-            time
+            time.sleep(2)
             return
         
         
