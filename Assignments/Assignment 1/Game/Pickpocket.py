@@ -695,4 +695,4 @@ class Pickpocket:
             self.shopVisited = False
             
         else:
-            print("You have completed all the quests!, You are the new king!")
+            print("You have completed all the quests!")
