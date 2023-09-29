@@ -258,7 +258,7 @@ class Soldier:
         while True: #Creating a loop that will run until you choose to battle the king
             if not inBattle:
                 #Asking the user if they are ready to battle the king
-                choice = input("Are you ready to duel the king? (y/n): ").lower()
+                choice = input("Are you ready to duel the king? (yes/no): ").lower()
                 
                 if choice in {'n','no'}:
                     print("Retreating wont help you become king! Gather your courage and fight!")
@@ -340,7 +340,7 @@ class Soldier:
                     break
         
     '''Define the function for the become king challenge
-    This is the final challenge of the game, 
+    This is the final challenge of the game,
     if the player wins this battle they will become the king
     '''
     def becomeKing(self):
@@ -348,11 +348,12 @@ class Soldier:
         print("\nFinal Mission: Battle against the kings best solider!")
         time.sleep(1)
         print("...")
+        time.sleep(1)
         print("The Dark Knight has arrived!")
         time.sleep(1)
         #Setting up the dark knights stats
         darkKnightHealth = 50
-        darkKnightDamage = 3
+        darkKnightDamage = 4
         darkKnightArmour = 8
         darkKnightStamina = 8
         
@@ -360,6 +361,7 @@ class Soldier:
             #Displaying the players health and the dark knights health
             print("\nYour Health:", self.health)
             print("Dark Knight's Health:", darkKnightHealth)
+            time.sleep(1)
             
             #Determine available actions based on the players stats
             actions = ["Attack", "Defend"]
@@ -369,6 +371,7 @@ class Soldier:
                 actions.append("Special Attack")
             #Printing the available actions
             print("Available Actions:", ", ".join(actions))
+            time.sleep(1)
             #Players turn to choose an action
             choice = input("Choose your action: 1) Attack or 2) Defend or 3) Special Attack: ").lower()
             time.sleep(1)
@@ -389,6 +392,7 @@ class Soldier:
                 else:
                     time.sleep(1)
                     print("The Dark Knight's armour is too strong, he blocked your attack!")
+                    
                 
                 #Dark Knight's attack logic
                 if darkKnightAttack > self.armour:
@@ -465,7 +469,6 @@ class Soldier:
                 # Ask the player if they want to restart the game or exit
                 restart = input("Would you like to restart the game and choose a different role? (yes/no): ").lower()
                 if restart == 'yes':
-                    print("CODE LOGIC FOR RESTARTING GAME")
                     # Restart the game
                     self.game.chooseRole()
                 else:
