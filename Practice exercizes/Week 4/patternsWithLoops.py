@@ -12,5 +12,5 @@
 
 for i in range(1,7):
     for j in range(1,i+1):
-        print(j, end="")
-
+        print(j, end=" ")
+    print() # add a new line after each row is printed
