@@ -94,3 +94,13 @@ while True:
         break
 
 print("Thank you for banking with us!")
+
+
+product = 1
+i = 1
+while 1 < 10:
+    product = product * i
+    i = i + 1
+print(product)
+
+
