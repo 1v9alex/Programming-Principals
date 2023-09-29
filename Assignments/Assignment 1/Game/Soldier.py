@@ -126,7 +126,6 @@ class Soldier:
                 
     #Define the function for the invade kingdom challenge
     def invadeKingdom(self):
-        #Printing the intro to the second quest
         while True:
             #Restting the choice variable
             choice = ""
