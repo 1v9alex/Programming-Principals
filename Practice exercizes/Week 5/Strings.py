@@ -3,13 +3,16 @@
 #now checking for a valid email too
 # if there is more then 1 @ sign in the email its invalid printing if the email is invalid
 email = input("Enter an email: ")
-while email.count("@") != 1:
+#do the loop using the find function
+while email.find("@") == -1 or email.find("@") != email.rfind("@"):
+    print("This email is invalid, please try again.")
     email = input("Enter an email: ")
-    if email.count("@") > 1:
-        print("This email is invalid")
-    elif email.count("@") == 0:
-        print("This email is invalid")
-print("This email is valid")
+
+# do the email using the count function
+while email.count("@") != 1:
+    print("This email is invalid, please try again.")
+    email = input("Enter an email: ")
+print("This email is valid.")
 
 
 password = input("Enter a password: ")
