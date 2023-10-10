@@ -48,6 +48,17 @@ class Pickpocket:
     
     #Creating the function for the first challenge/quest
     def stealFromPasserby(self):
+        '''
+        This method handles the logic for the pickpocket's challenge where they have to steal from passersby.
+        
+        The user has to select a victim from the provided list and choose an approach method (distract, 
+        steal quietly, or snatch and run). The success of the theft is determined by a dice roll 
+        modified by the pickpocket's stats and the victim's difficulty level. Successful thefts increase
+        the pickpocket's stats and add to their gold count. If caught, the user can retry or exit.
+        
+        Returns:
+        None. The method modifies the pickpocket's stats, gold, and list of challenges directly.
+        '''
         #Dictionary of victims that the pickpocket can steal from along with the item name, difficulty, and value
         victims = {
             "Blacksmith": {"item": "Newly Forged Iron Sword", "difficulty": 5, "value": 20},
@@ -185,6 +196,15 @@ class Pickpocket:
             
     #Creating the function for the second quest
     def stealFromMuseum(self):
+        '''
+        Allows the player to attempt a heist at the Royal Museum, choosing between different artifacts to steal.
+        
+        The player's choices and stats will determine the outcome of the heist, with successful heists 
+        resulting in increased stats and rewards. If the player is caught, they have the option to retry or exit.
+        
+        Returns:
+            bool: True if the quest is successfully completed, False otherwise.
+        '''
         time.sleep(1)
         print("\nYou find yourself in front of the Royal Museum, known for its precious artifacts stolen from other kingdoms.")
         #Dictionary of artifacts that the pickpocket can steal from along with the difficulty and value
@@ -302,6 +322,16 @@ class Pickpocket:
         
     #Creating the function for the third challenge
     def royalRelicRobbery(self):
+        '''
+        Leads the player through the King's Castle in an attempt to steal the Queen's Golden Scepter.
+        
+        The player must navigate through various challenges, making choices that affect their chances of success. 
+        Successful completion results in improved stats and the option to attempt an even greater heist.
+        If the player is caught, they have the option to retry or exit.
+        
+        Returns:
+            bool: True if the quest is successfully completed, False otherwise.
+        '''
         time.sleep(1)
         #Quest/challenge introduction
         print("\nYou find yourself inside the King's Castle, with your eyes set on the Queen's Golden Scepter")
@@ -462,6 +492,19 @@ class Pickpocket:
                     
     #Creating the function for the fourth and final challenge
     def stealKingsCrown(self):
+        '''
+        Leads the player through an adventurous attempt to steal the King's Crown from the throne room.
+        
+        The player encounters heavily guarded areas, has to make choices on how to approach the heist, and
+        leverages their stealth attribute to influence the outcome. The roll of dice determines their success
+        in this daring endeavor.
+        
+        Successful theft results in improved attributes and completion of the quest.
+        Failure can lead to capture, with the option to retry or quit.
+        
+        Returns:
+            None: The function ends either with a successful theft or the player's decision to quit.
+        '''
         time.sleep(1)
         print("\nYou decided to stay and try to steal the Kings Crown!")
         time.sleep(1)
@@ -547,6 +590,18 @@ class Pickpocket:
     
     #Creating the function for the item shop
     def visitShop(self):
+        '''
+        Invites the player to a shop where they can purchase various items using their accumulated gold.
+        
+        Items on display include tools and utilities, each having a specific cost. Players can choose 
+        to buy items, which affects their stats and deducts gold from their balance. Items once purchased
+        are removed from the shop.
+        
+        The function iterates until the player decides to exit the shop or when they run out of gold.
+        
+        Returns:
+            None: The function ends when the player exits the shop.
+        '''
         #Check if the player is able to visit the shop based on quest completion and if they have already visited the shop
         if self.questsCompletedCount <= 0 or (self.questsCompletedCount <= len(self.challenges) and self.shopVisited):
             print("You cant visit the shop now!")
@@ -621,6 +676,16 @@ class Pickpocket:
             self.shopVisited = True
     #Creating the function for viewing the players inventory
     def viewInventory(self):
+        '''
+        Offers the player a comprehensive view of their inventory, detailing the items they possess.
+        
+        The inventory showcases the player's gold balance, tools, and utility items. Each item's associated 
+        stats are displayed for clarity. The player can choose to continue viewing the inventory or 
+        return to the main menu.
+        
+        Returns:
+            None: The function ends when the player decides to return to the main menu.
+        '''
         #Display the players inventory until the player decides to go back to the menu
         while True:
             print("\nYour Inventory: ")
@@ -651,6 +716,15 @@ class Pickpocket:
             
         
     def viewStats(self):
+        '''
+        Presents the player with an overview of their current statistics.
+        
+        The function displays stats like health, stealth, luck, speed, and the number of quests completed.
+        The player can choose to continue viewing the stats or return to the main menu.
+        
+        Returns:
+            None: The function ends when the player decides to return to the main menu or opts to continue viewing the stats.
+        '''
         #Display the players stats until the player decides to go back to the menu
         while True:
             print("\nYour Stats:")
@@ -671,6 +745,16 @@ class Pickpocket:
                 print("Invalid input. Please enter 'y', 'yes', 'n', or 'no'.")
 
     def startNextQuest(self):
+        '''
+        Initiates the next quest based on the player's progression.
+        
+        The function checks the player's quest completion count to determine which quest should be started next.
+        If the player hasn't completed any quests, it initiates the first quest. For subsequent quests, it selects 
+        from the remaining challenges. If all challenges are completed, it informs the player of their achievement.
+        
+        Returns:
+            None: The function initiates the relevant quest or ends after notifying the player of their quest status.
+        '''
         if self.questsCompletedCount == 0:
             print("You have not completed any quests yet!")
             #if no quests are completed the player is then able to start the first quest

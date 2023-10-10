@@ -1,6 +1,6 @@
 '''
 PROG10004 - Programming Principles, Assignment 1
-Due Date: Oct 2, 2023
+Due Date: Oct 11, 2023
 Author: Alexander Gasee
 Student Number: 991728593
 Professor: Muhammad Asif
@@ -11,11 +11,18 @@ from Pickpocket import Pickpocket
 #Creating a game class to handle the game
 class Game:
     def __init__(self):
+        '''
+        Constructor for the Game class. Initializes the player to None.
+        '''
         #Initializing the player to None
         self.player = None
     
     
     def startGame(self):
+        '''
+        Starts the main game loop. Welcomes the player, allows them to choose their role, 
+        and repeatedly displays the main menu and takes player input until the game is exited.
+        '''
         #Starting the game
         print("Welcome to Medieval Journey!")
         #Allowing the player to choose their role
@@ -28,6 +35,11 @@ class Game:
             self.choicePicked(choice)
     
     def chooseRole(self):
+        '''
+        Lets the player choose their role for the game. They can choose to be either a Soldier,
+        a Pickpocket, or to Exit the game. Based on their choice, a respective object (either 
+        Soldier or Pickpocket) is created.
+        '''
         #Loop until the players makes a valid choice
         while True:
             roleChoice = input("Choose your role: 1) Soldier, 2) Pickpocket or 3) Exit? ").lower()
@@ -52,6 +64,9 @@ class Game:
                 
                 
     def displayMenu(self):
+        '''
+        Displays the main menu for the game, showing various options the player can pick from.
+        '''
         #Displaying the main menu
         print("\nOptions: ")
         print("1) Start Next Quest")
@@ -62,6 +77,13 @@ class Game:
         
     
     def choicePicked(self, choice):
+        '''
+        Handles the choice picked by the player from the main menu. Executes the corresponding
+        action based on the player's input.
+
+        Args:
+        - choice (str): Player's input choice (should be a string representation of a number between 1 and 5).
+        '''
         #Handling the players menu choices
         if choice == '1':
             self.player.startNextQuest()
