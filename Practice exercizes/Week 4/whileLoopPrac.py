@@ -104,3 +104,38 @@ while 1 < 10:
 print(product)
 
 
+
+
+# find the minimum, maximum, average, and frequencies of a series of numbers entered by the user
+
+number = eval(input("Enter a number: "))
+
+max = number
+min = number
+sum = number
+count = 1
+freq = {}
+
+while number != 0:
+    number = eval(input("Enter a number: "))
+    if number > max:
+        max = number
+    elif number < min:
+        min = number
+    sum += number
+    count += 1
+    if number in freq:
+        freq[number] += 1
+    else:
+        freq[number] = 1
+
+if count > 1:
+    average = sum / (count - 1)
+    print(f"Minimum: {min}")
+    print(f"Maximum: {max}")
+    print(f"Average: {average:.2f}")
+    print("Frequencies:")
+    for num, count in freq.items():
+        print(f"{num}: {count}")
+else:
+    print("No numbers entered.")
