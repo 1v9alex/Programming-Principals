@@ -4,6 +4,16 @@ import time
 #Creating and initalizing the soldier class
 class Soldier:
     def __init__(self, name,game):
+        '''
+        Initializes a Soldier object with the specified name and game details.
+        
+        This constructor sets the initial stats, inventory, and available challenges for the soldier based on 
+        the game's mechanics. With this setup, the soldier is ready to embark on quests and face challenges.
+        
+        Args:
+            name (str): The name of the soldier.
+            game (str): The game in which the soldier is participating.
+        '''
         #Initializing the attributes of the soldier
         self.name = name
         self.game = game
@@ -42,6 +52,17 @@ class Soldier:
         
         #function for the battle dragon challenge
     def battleDragon(self):
+        '''
+        Engages the soldier in a fierce battle with a dragon.
+        
+        The soldier can decide to either attack or defend against the dragon's onslaughts. The outcome of each
+        turn in battle is influenced by dice rolls, combined with the soldier's attributes. A victorious soldier 
+        gains rewards in the form of improved stats and gold. If defeated, the soldier has the option to retry 
+        the battle or exit the game.
+        
+        Returns:
+            None
+        '''
         #Printing the intro to the first quest
         print("\nFirst Challenge: Battle your first dragon!")
         time.sleep(1)
@@ -126,6 +147,17 @@ class Soldier:
                 
     #Define the function for the invade kingdom challenge
     def invadeKingdom(self):
+        '''
+        Challenges the soldier to infiltrate and either assassinate the king or lead an invasion on a kingdom.
+        
+        The soldier must decide between a covert operation to assassinate the king or openly attacking with fellow
+        soldiers. The success of the mission is influenced by dice rolls combined with the soldier's attributes.
+        A successful operation results in increased stats, gold, and the removal of the challenge. If the mission
+        fails, the soldier can decide to retry or exit the game.
+        
+        Returns:
+            bool: True if the mission is successfully completed, False otherwise.
+        '''
         while True:
             #Restting the choice variable
             choice = ""
@@ -241,6 +273,16 @@ class Soldier:
                 exit()
     #Define the function for the overthrow king challenge
     def overthrowKing(self):
+        '''
+        Leads the player through a quest to overthrow the evil king from their old kingdom.
+        
+        The player, now with their own kingdom, challenges the evil king to a duel. The player and king 
+        take turns rolling dice to determine the outcome of attacks and defenses. The player's attributes
+        influence the results of the duel. Victory over the king grants improved stats and rewards.
+        
+        Returns:
+            None
+        '''
         #Printing the intro to the third quest
         print("Now that you have your own kingdom, its time to overthrow the evil king from your old kingdom!")
         time.sleep(2)
@@ -339,11 +381,19 @@ class Soldier:
                 if inBattle:
                     break
         
-    '''Define the function for the become king challenge
-    This is the final challenge of the game,
-    if the player wins this battle they will become the king
-    '''
+
     def becomeKing(self):
+        '''
+        Directs the player in the final challenge against the king's best soldier, the Dark Knight.
+        
+        In this final confrontation, the player faces the Dark Knight in a battle of strength and strategy.
+        Players can choose between regular attacks, defenses, and a special attack if certain criteria are met.
+        Victory over the Dark Knight results in the player becoming the ruler of the kingdom. Defeat prompts 
+        the player to either retry the battle or exit the game.
+        
+        Returns:
+            None
+        '''
         #Prints the intro to the final quest
         print("\nFinal Mission: Battle against the kings best solider!")
         time.sleep(1)
@@ -499,7 +549,17 @@ class Soldier:
             
             
     #Creating the function for the item shop
-    def visitShop(self):
+    def visitShop(self): 
+        '''
+        Allows the player to visit the in-game shop and purchase items using gold.
+        
+        The player can view available items, both offensive and defensive, and choose to buy them if they have 
+        enough gold. Purchasing an item increases the player's stats based on the item's attributes and removes 
+        the item from the shop's available items list.
+        
+        Note:
+            Players can visit the shop only once after completing a quest and if they have completed at least one quest.
+        '''
         #Check if the player is able to visit the shop based on quest completion and if they have already visited the shop
         if self.questsCompletedCount <= 0 or (self.questsCompletedCount <= len(self.challenges) and self.shopVisited):
             print("You cant visit the shop now!")
@@ -576,6 +636,15 @@ class Soldier:
             
     #Creating the function for viewing the players inventory
     def viewInventory(self):
+        '''
+        Displays the player's current inventory including gold and items.
+        
+        Players can view their accumulated items, both offensive and defensive, and their respective stats. 
+        This function provides a comprehensive overview of the player's assets.
+        
+        Returns:
+            None
+        '''
         #Display the players inventory until the player decides to go back to the menu
         while True:
             print("\nYour Inventory: ")
@@ -606,6 +675,14 @@ class Soldier:
             
         
     def viewStats(self):
+        '''
+        Displays the player's current stats.
+        
+        Provides a summary of the player's attributes, including health, damage, armor, stamina, and quests completed.
+        
+        Returns:
+            None
+        '''
         #Display the players stats until the player decides to go back to the menu
         while True:
             print("\nYour Stats:")
@@ -628,6 +705,19 @@ class Soldier:
         
 
     def startNextQuest(self):
+        '''
+        Initiates the next quest for the player based on their progress.
+        
+        The function determines which quest to start next based on the number of completed quests. Each quest presents 
+        its unique challenges and offers different rewards. The player progresses through a storyline that culminates 
+        in them becoming the new king.
+        
+        Note:
+            Quests have a sequential order and must be completed in that order.
+        
+        Returns:
+            None
+        '''
         if self.questsCompletedCount == 0:
             print("You have not completed any quests yet!")
             #if no quests are completed the player is then able to start the first quest
