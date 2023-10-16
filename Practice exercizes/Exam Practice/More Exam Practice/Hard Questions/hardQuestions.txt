@@ -1,0 +1,11 @@
+"""
+Strings, For Loops & Conditional Statements: Given a sentence, use a loop to count how many vowels it contains.
+Data Types, Variables & Algorithms: Create a dictionary where keys are numbers between 1 and 5, and values are their respective factorials.
+Functions, Strings & Algorithms: Write a function that takes in a string and returns the string with its words reversed (e.g., "Hello World" -> "World Hello").
+For Loops, Range & Conditional Statements: Use a for loop to print prime numbers between 2 and 50.
+Functions, Algorithms & Strings: Write a function that counts how many times a particular letter appears in a given string.
+Modules, For Loops & Variables: Use the random module to simulate the roll of two dice 10 times, and store the results in a list.
+Strings, Conditional Statements & Algorithms: Determine if a user-provided string has balanced parentheses.
+Data Types, Selection & Loops: Ask the user to input a list of numbers and then print the sum of even numbers in the list.
+Strings, Loops & Selection: Given a list of words, find the word with the most vowels.
+"""
