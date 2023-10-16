@@ -1,0 +1,12 @@
+"""
+For Loops & Strings: Given a string, use a for loop to print its characters in reverse order.
+Functions & Conditional Statements: Write a function that takes in two numbers and returns the larger. If they are equal, return "Equal".
+While Loops & Range: Use a while loop to simulate a dice roll (numbers 1-6) until a 5 is rolled.
+Selection, Iteration & Strings: Given a list of words, use a loop to print only those words that start with the letter 'a' or 'A'.
+Functions, For Loops & Algorithms: Write a function that computes the factorial of a given number using a for loop.
+Strings & Conditional Statements: Check if a user-provided string is a palindrome.
+Data Types & Selection: Create a dictionary of three user-provided keys and values, then print the value for a user-asked key.
+Functions & Variables: Create a function that takes a radius as an argument and returns the area of a circle. Test it with radius = 5.
+Range & Loops: Generate a list containing the squares of numbers between 1 to 10 using a for loop and range.
+Algorithms, Selection & Iteration: Write a program that finds the second largest number in a given list of numbers.
+"""

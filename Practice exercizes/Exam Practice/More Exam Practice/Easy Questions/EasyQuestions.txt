@@ -1,0 +1,12 @@
+"""
+Variables & Data Types: Declare a string variable named greeting with the value "Hello". Print its type using the type() function.
+Strings & Conditional Statements: Ask the user for their name. If it's "Alice", print "Hello, Alice!", otherwise, print "Hello, stranger!"
+For Loops & Range: Use a for loop and the range function to print the first 5 even numbers.
+Strings & For Loops: Given the string "PYTHON", use a for loop to print each character individually.
+While Loops: Implement a countdown from 10 using a while loop.
+Selection & Conditional Statements: Given a list of numbers, use a loop to find and print the first negative number.
+Variables & Algorithms: Calculate the area of a rectangle, store it in a variable, and print it.
+Strings: Convert the integer 1234 into a string and concatenate it with another string "5678". Print the result.
+Range & Conditional Statements: Use the range function to print numbers from 10 to 20, but skip printing the number 15.
+While Loops & Strings: Repeatedly ask the user to enter a word, and stop when they enter "stop".
+"""
