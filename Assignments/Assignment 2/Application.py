@@ -19,6 +19,7 @@ class Application:
         """
         while True:
             value = input(prompt)
+            #Validate input using the validation function
             if validationFN(value):
                 return value
             else:
@@ -28,6 +29,7 @@ class Application:
         """
         Guides the user to input the product details and create a new product instance
         """
+        #Getting the product attributes from the user then using validation function to ensure correct input format
         print("Welcome to the Programming Principles Sample Product Inventory")
         code = int(self.getValidInput("Please enter the product code: ", lambda x: x.isdigit() and 100 <= int(x) <= 1000, "Invalid product code."))
         name = self.getValidInput("Please enter the Product Name: ", lambda x: len(x) > 0, "Product name can't be empty.")
@@ -35,17 +37,20 @@ class Application:
         salePrice = float(self.getValidInput("Please enter the Product Sale Price: ", lambda x: x.replace('.', '', 1).isdigit() and float(x) > 0, "Invalid sale price."))
         manufactureCost = float(self.getValidInput("Please enter the Product Manufacture Cost: ", lambda x: x.replace('.', '', 1).isdigit() and float(x) > 0, "Invalid manufacture cost."))
         monthlyUnits = int(self.getValidInput("Please enter the estimated monthly production: ", lambda x: x.isdigit() and int(x) >= 0, "Invalid monthly units."))
-
+        
+        #Creating a new product instance using the user provided information
         self.product = Product(code, name, salePrice, manufactureCost, stockLevel, monthlyUnits)
 
     def simulateAndReport(self):
         """
         Simulates sales and stock for 12 months and then displays a report
         """
+        #Checks if a product has been created first
         if not self.product:
             print("Please create a product first!")
             return
-
+        
+        #Displaying the initial product information
         print("\n*******Programming Principles Sample Stock Statement*******\n")
         print(f"Product Code: {self.product.code}")
         print(f"Product Name: {self.product.name}\n")
@@ -54,17 +59,19 @@ class Application:
         print(f"Monthly Production: {self.product.monthlyUnits} units (Approx.)\n")
 
         totalSold = 0
-        for month in range(1, 13):
-            unitsSold = self.product.monthlySimuation()
+        for month in range(1, 13): #Looping through 12 months
+            unitsSold = self.product.monthlySimuation() #Simulating sales for the month
             totalSold += unitsSold
+            #Displaying the data for each month
             print(f"Month {month}:")
             print(f"|        Manufactured: {self.product.monthlyUnits} units")
             print(f"|        Sold:        {unitsSold} units")
             print(f"|        Stock:       {self.product.stockLevel} units")
             
-            if month == 12:
+            if month == 12: #Adding an extra line after the 12th months data so it looks like the image in the assignment
                 print("|")
         
+        #Calculating and displaying the net profit (or loss)
         netProfit = self.product.netProfit(totalSold)
         print(f"Net Profit: ${netProfit:.2f} CAD")
 
@@ -72,8 +79,8 @@ class Application:
         """
         Starts the application by creating a product and then simulating sales and displaying a report
         """
-        self.createProduct()
-        self.simulateAndReport()
+        self.createProduct() #Creating the product
+        self.simulateAndReport() #Simulating sales and displaying a report
 
 app = Application()
 app.run()
