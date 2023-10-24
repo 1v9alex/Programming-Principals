@@ -1,17 +1,33 @@
 from Product import Product
 class Application:
     def __init__(self):
+        """
+        Initializes the Application class with a product attribute set to None.
+        """
         self.product = None
 
-    def getValidInput(self, prompt, validationFN, error_msg):
+    def getValidInput(self, prompt, validationFN, errorMsg):
+        """
+        Gets input from the user and checks if its valid
+        Parameters:
+        - prompt (str): The prompt to display to the user when asking for input
+        - validationFN (function): The function to use to validate the input
+        - errorMsg (str): The error message to display if the input is invalid
+        
+        Returns:
+        -value (str): The valid input from the user
+        """
         while True:
             value = input(prompt)
             if validationFN(value):
                 return value
             else:
-                print(error_msg)
+                print(errorMsg)
 
     def createProduct(self):
+        """
+        Guides the user to input the product details and create a new product instance
+        """
         print("Welcome to the Programming Principles Sample Product Inventory")
         code = int(self.getValidInput("Please enter the product code: ", lambda x: x.isdigit() and 100 <= int(x) <= 1000, "Invalid product code."))
         name = self.getValidInput("Please enter the Product Name: ", lambda x: len(x) > 0, "Product name can't be empty.")
@@ -23,6 +39,9 @@ class Application:
         self.product = Product(code, name, salePrice, manufactureCost, stockLevel, monthlyUnits)
 
     def simulateAndReport(self):
+        """
+        Simulates sales and stock for 12 months and then displays a report
+        """
         if not self.product:
             print("Please create a product first!")
             return
@@ -50,6 +69,9 @@ class Application:
         print(f"Net Profit: ${netProfit:.2f} CAD")
 
     def run(self):
+        """
+        Starts the application by creating a product and then simulating sales and displaying a report
+        """
         self.createProduct()
         self.simulateAndReport()
 
