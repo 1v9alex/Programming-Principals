@@ -41,8 +41,11 @@ class Application:
             print(f"Month {month}:")
             print(f"|        Manufactured: {self.product.monthlyUnits} units")
             print(f"|        Sold:        {unitsSold} units")
-            print(f"|        Stock:       {self.product.stockLevel} units\n")
-
+            print(f"|        Stock:       {self.product.stockLevel} units")
+            
+            if month == 12:
+                print("|")
+        
         netProfit = self.product.netProfit(totalSold)
         print(f"Net Profit: ${netProfit:.2f} CAD")
 
