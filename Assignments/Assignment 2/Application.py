@@ -71,9 +71,20 @@ class Application:
             if month == 12: #Adding an extra line after the 12th months data so it looks like the image in the assignment
                 print("|")
         
-        #Calculating and displaying the net profit (or loss)
+        # Calculating the net amount
         netProfit = self.product.netProfit(totalSold)
-        print(f"Net Profit: ${netProfit:.2f} CAD")
+        
+        # Deciding how to present the result based on the calculated value
+        if netProfit > 0:
+            #If number is > 0 it will print the net profit
+            print(f"Net Profit: ${netProfit:.2f} CAD")
+        elif netProfit < 0:
+            #If number is < 0 it will print the net loss
+            print(f"Net Loss: ${abs(netProfit):.2f} CAD")
+        else:
+            #If the number is 0 it will print that you broke even
+            print("You Broke Even!")
+
 
     def run(self):
         """
