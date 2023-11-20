@@ -5,31 +5,6 @@ class Program:
     #Constructor intializes the program with a bank probject
     def __init__(self, bank):
         self.bank = bank
-
-    #method to open a new account
-    def openAccountDialog(self):
-        # Get account details from user
-        accountType = input("Enter account type (savings/chequing): ")
-        accountNumber = input("Enter account number: ")
-        accountHolderName = input("Enter account holder's name: ")
-        rateOfInterest = float(input("Enter rate of interest: "))
-        currentBalance = float(input("Enter current balance: "))
-        if accountType.lower() == "savings":
-            minimumBalance = float(input("Enter minimum balance: "))
-            additionalParam = minimumBalance
-        elif accountType.lower() == "chequing":
-            overdraftAllowed = float(input("Enter overdraft limit: "))
-            additionalParam = overdraftAllowed
-        else:
-            print("Invalid account type.")
-            return
-
-        #Call the Bank's method to open the account
-        try:
-            new_account = self.bank.openAccount(accountType, accountNumber, accountHolderName, rateOfInterest, currentBalance, additionalParam)
-            print(f"Account {new_account.getAccountNumber()} opened successfully.")
-        except ValueError as e:
-            print(f"Error opening account: {e}")
             
     #Method to display the main menu and handle user input
     def showMainMenu(self):
@@ -39,7 +14,27 @@ class Program:
             print("3. Exit")
             choice = input("Enter your choice: ")
             if choice == "1" or choice == "Open Account":
-                self.openAccountDialog()  # Call the method to open a new account
+                #Get account details from user
+                accountType = input("Enter account type (savings/chequing): ")
+                accountNumber = input("Enter account number: ")
+                accountHolderName = input("Enter account holder's name: ")
+                rateOfInterest = float(input("Enter rate of interest: "))
+                currentBalance = float(input("Enter current balance: "))
+                if accountType.lower() == "savings":
+                    minimumBalance = float(input("Enter minimum balance: "))
+                    additionalParam = minimumBalance
+                elif accountType.lower() == "chequing":
+                    overdraftAllowed = float(input("Enter overdraft limit: "))
+                    additionalParam = overdraftAllowed
+                else:
+                    print("Invalid account type.")
+                    return
+                #Call the Bank's method to open the account
+                try:
+                    new_account = self.bank.openAccount(accountType, accountNumber, accountHolderName, rateOfInterest, currentBalance, additionalParam)
+                    print(f"Account {new_account.getAccountNumber()} opened successfully.")
+                except ValueError as e:
+                    print(f"Error opening account: {e}")
             elif choice == "2" or choice == "Select Account":
                 accountNumber = input("Please enter the account number: ")
                 account = self.bank.searchAccount(accountNumber)
