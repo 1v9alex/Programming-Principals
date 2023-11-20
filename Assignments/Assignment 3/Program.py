@@ -4,13 +4,6 @@ class Program:
     def __init__(self, bank):
         self.bank = bank
 
-    def selectAccount(self):
-        accountNumber = input("Please enter the account number: ")
-        account = self.bank.searchAccount(accountNumber)
-        if account:
-            self.showAccountMenu(account)
-        else:
-            print("Account not found.")
             
     def openAccountDialog(self):
         # Get account details from user
@@ -46,7 +39,12 @@ class Program:
             if choice == "1" or choice == "Open Account":
                 self.openAccountDialog()  # Call the method to open a new account
             elif choice == "2" or choice == "Select Account":
-                self.selectAccount()
+                accountNumber = input("Please enter the account number: ")
+                account = self.bank.searchAccount(accountNumber)
+                if account:
+                    self.showAccountMenu(account)
+                else:
+                    print("Account not found.")
             elif choice == "3" or choice == "Exit":
                 print("Thank you for using our banking system.")
                 break
