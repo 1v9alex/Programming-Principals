@@ -1,10 +1,12 @@
 from Bank import Bank
 
+#Program class that handles the UI of the banking system
 class Program:
+    #Constructor intializes the program with a bank probject
     def __init__(self, bank):
         self.bank = bank
 
-            
+    #method to open a new account
     def openAccountDialog(self):
         # Get account details from user
         accountType = input("Enter account type (savings/chequing): ")
@@ -22,14 +24,14 @@ class Program:
             print("Invalid account type.")
             return
 
-        # Call the Bank's method to open the account
+        #Call the Bank's method to open the account
         try:
             new_account = self.bank.openAccount(accountType, accountNumber, accountHolderName, rateOfInterest, currentBalance, additionalParam)
             print(f"Account {new_account.getAccountNumber()} opened successfully.")
         except ValueError as e:
             print(f"Error opening account: {e}")
             
-    
+    #Method to display the main menu and handle user input
     def showMainMenu(self):
         while True:
             print("\n1. Open Account")
@@ -51,6 +53,7 @@ class Program:
             else:
                 print("Invalid choice. Please try again.")
                 
+    # Method to display the account menu for a specific account.
     def showAccountMenu(self, account):
         while True:
             print("\n1. Check Balance")
@@ -78,12 +81,14 @@ class Program:
                 break
             else:
                 print("Invalid choice. Please try again.")
-
+    
+    #method to start the program and show the main menu
     def run(self):
         self.showMainMenu()
 
+#Entry point of the program
 if __name__ == "__main__":
-    bank = Bank("ExampleBank")
+    bank = Bank("Bank")
     app = Program(bank)
     app.run()
 
