@@ -1,4 +1,3 @@
-#create a laptop list like a website, every laptop there has some attributes model,price, rating, make sure to use classes and inhertiance or dictictionary, or compsition or all 3, its like a shop listing on sites like bestbuy or staples, make sure there is an option for user to search based on model as well as another one with maxium price which shows laptops in the dictonary under the max price inputted through the dictionary
 
 class Laptop:
     def __init__(self,model,price,rating,brand):
@@ -63,10 +62,25 @@ laptops = {
     "Laptop12": Laptop("Acer Aspire", 400, 3.5, "Acer"),
     "Laptop13": Laptop("Microsoft Surface", 900, 4.0, "Microsoft"),
     "Laptop14": Laptop("Microsoft Surface Pro", 800, 4.5, "Microsoft"),
-    "Laptop15": Laptop("Samsung Notebook", 700, 3.5, "Samsung")
+    "Laptop15": Laptop("Samsung Notebook", 700, 3.5, "Samsung"),
+    "Laptop16": Laptop("Samsung Galaxybook", 600, 3.0, "Samsung"),
+    "Laptop17": Laptop("Razer Blade", 1000, 4.0, "Razer"),
+    "Laptop18": Laptop("Razer Blade Stealth", 800, 4.5, "Razer"),
+    "Laptop19": Laptop("MSI Stealth", 900, 4.0, "MSI"),
+    "Laptop20": Laptop("MSI Prestige", 700, 3.5, "MSI"),
+    "Laptop21": Laptop("Google Pixelbook", 800, 4.0, "Google"),
+    "Laptop22": Laptop("Google Pixelbook Go", 600, 3.5, "Google"),
+    "Laptop23": Laptop("Huawei Matebook", 700, 4.0, "Huawei"),
+    "Laptop24": Laptop("Huawei Matebook X", 500, 3.5, "Huawei"),
+    "Laptop25": Laptop("LG Gram", 600, 4.0, "LG"),
+    "Laptop26": Laptop("LG Gram 2-in-1", 500, 3.5, "LG"),
+    "Laptop27": Laptop("Toshiba Portege", 600, 4.0, "Toshiba"),
+    "Laptop28": Laptop("Toshiba Tecra", 500, 3.5, "Toshiba"),
+    "Laptop29": Laptop("Xiaomi Mi Notebook", 700, 4.0, "Xiaomi"),
+    "Laptop30": Laptop("Xiaomi Mi Notebook Pro", 500, 3.5, "Xiaomi")
 }
 
-#method for searching my model or brand  
+#method for searching my model or brand i.e apple or macbook  
 def searchByModel(query):
     return [laptop for laptop in laptops.values() if laptop.model == query or laptop.brand == query]
 
@@ -112,7 +126,7 @@ while True:
         max_price = float(input("Enter maximum price: "))
         results = searchByMaxPrice(max_price)
         if not results:
-            print("No laptops found that match your criteria.")
+            print("No laptops found that match your .")
             continue_shopping = input("Would you like to continue shopping? (y/n): ")
             if continue_shopping.lower() == 'n':
                 break
