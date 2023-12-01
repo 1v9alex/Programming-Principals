@@ -82,7 +82,8 @@ laptops = {
 
 #method for searching my model or brand i.e apple or macbook  
 def searchByModel(query):
-    return [laptop for laptop in laptops.values() if laptop.model == query or laptop.brand == query]
+    query = query.lower()  # Convert the query to lowercase
+    return [laptop for laptop in laptops.values() if laptop.model.lower() == query or laptop.brand.lower() == query]
 
 #method to search by max price
 def searchByMaxPrice(maxPrice):
