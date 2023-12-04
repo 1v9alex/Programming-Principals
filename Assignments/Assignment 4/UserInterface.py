@@ -26,9 +26,16 @@ class UserInterface:
     
     def getValidInput(self, prompt, validOptions, inputType):
         while True:
-            userInput = input(prompt).capitalize()
-            if userInput in validOptions:
-                return userInput
+            userInput = input(prompt)
+            
+            # Special handling for roles to match exact case
+            if inputType == "Role":
+                formattedInput = userInput.upper() if userInput.lower() == "adc" else userInput.capitalize()
+            else:
+                formattedInput = userInput.capitalize()
+
+            if formattedInput in validOptions:
+                return formattedInput
             else:
                 print(f"Invalid {inputType}. Please enter one of the following: {', '.join(validOptions)}.")
     
@@ -86,7 +93,7 @@ class UserInterface:
             if role in sortedChampions:
                 print(f"\n{role}")
                 for champ in sortedChampions[role]:
-                    print(f"{champ.getName()}: {champ.getTier()} Tier")
+                    print(f"{champ.getName()}: {champ.getTier()} Tier, Difficulty {champ.getDifficulty()}")
                 print("-" * 20)
         while True:
             choice = input("\nWould you like to return to the main menu? (yes/no): ").lower()
