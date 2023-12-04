@@ -8,10 +8,12 @@ def main():
     ui = UserInterface()
     dataManager = DataPersistenceManager()
     
+    # Load data from file
     dataFilePath = "C:\\Users\\alexg\\OneDrive\\Desktop\\Programming\\Assignments\\Assignment 4\\champions.csv"
 
     manager.champions = dataManager.loadData(dataFilePath)
     
+    # Main loop
     while True:
         ui.displayMenu()
         choice = ui.getUserInput()
@@ -34,7 +36,7 @@ def main():
             ui.displaySearchResults(results)
         elif choice == 3:
             name = input("Enter the name of the champion you want to update: ")
-            if manager.championExists(name):  # You might need to implement this method
+            if manager.championExists(name):
                 newData = ui.getChampionData()[1:]
                 manager.updateChampion(name, {'tier': newData[0], 'difficulty': newData[1], 'role': newData[2]})
                 dataManager.saveData(manager.champions, dataFilePath)

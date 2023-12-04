@@ -1,4 +1,6 @@
 class UserInterface:
+    
+    #display the main menu options to the user
     def displayMenu(self):
         print("\n1. Add Champion")
         print("2. Search Champion")
@@ -7,6 +9,7 @@ class UserInterface:
         print("5. Display All Champions")
         print("6. Exit")
     
+    #get the user input and return it
     def getUserInput(self):
         while True:
             try:
@@ -15,6 +18,7 @@ class UserInterface:
             except ValueError:
                 print("Invalid input. Please enter a number.")
     
+    #get the champion data from the user and return it
     def getChampionData(self):
         name = input("Enter Champion Name: ").title()
 
@@ -24,6 +28,7 @@ class UserInterface:
 
         return name, tier, difficulty, role
     
+    #get the user input and validate it against the valid options
     def getValidInput(self, prompt, validOptions, inputType):
         while True:
             userInput = input(prompt)
@@ -39,6 +44,7 @@ class UserInterface:
             else:
                 print(f"Invalid {inputType}. Please enter one of the following: {', '.join(validOptions)}.")
     
+    #get the search criteria from the user and return it
     def getSearchCriteria(self):
         print("\nSearch by: ")
         print("1. Name")
@@ -54,7 +60,7 @@ class UserInterface:
                     print("Please enter a number between 1 and 4.")
             except ValueError:
                 print("Please enter a valid number.")
-    
+    #get the search query from the user and return it
     def getSearchQuery(self, filter):
         if filter == "Tier":
             return self.getValidInput("Enter the Tier you want to search for: ", ["S", "A", "B", "C", "D"], "Tier")
@@ -65,7 +71,7 @@ class UserInterface:
         else:
             return input(f"Enter the {filter} you want to search for: ").capitalize()
 
-    
+    #display the search results to the user
     def displaySearchResults(self,results):
         if not results:
             print("No matching champions found.")
@@ -81,7 +87,7 @@ class UserInterface:
                 break
             else:
                 print("Invalid input. Please enter 'yes' or 'no'.")
-    
+    #display all champions to the user
     def displayAllChampions(self, champions):
         # Define the order of roles
         roleOrder = ["Top", "Jungle", "Mid", "ADC", "Support"]
@@ -104,7 +110,7 @@ class UserInterface:
             else:
                 print("Invalid input. Please enter 'yes' or 'no'.")
 
-    
+    # Sort champions by role and tier
     def sortChampionsByRoleAndTier(self, champions):
         # Sort champions by role and tier
         sortedChampions = {}
