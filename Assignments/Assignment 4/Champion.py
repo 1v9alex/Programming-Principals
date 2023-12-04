@@ -24,7 +24,7 @@ class Champion:
     def setDifficulty(self,difficulty):
         self.difficulty = difficulty
         
-    def GetRole(self):
+    def getRole(self):
         return self.role
     
     def setRole(self,role):
