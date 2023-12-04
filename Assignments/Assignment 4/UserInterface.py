@@ -17,10 +17,20 @@ class UserInterface:
     
     def getChampionData(self):
         name = input("Enter Champion Name: ").title()
-        tier = input("Enter Tier (S to D): ").upper()
-        difficulty = input("Enter Difficulty (Easy, Medium, Hard): ").capitalize()
-        role = input("Enter Role (Top, Mid, Jungle, Support, ADC): ").capitalize()
+
+        tier = self.getValidInput("Enter Tier (S to D): ", ["S", "A", "B", "C", "D"], "Tier")
+        difficulty = self.getValidInput("Enter Difficulty (Easy, Medium, Hard): ", ["Easy", "Medium", "Hard"], "Difficulty")
+        role = self.getValidInput("Enter Role (Top, Mid, Jungle, Support, ADC): ", ["Top", "Mid", "Jungle", "Support", "ADC"], "Role")
+
         return name, tier, difficulty, role
+    
+    def getValidInput(self, prompt, validOptions, inputType):
+        while True:
+            userInput = input(prompt).capitalize()
+            if userInput in validOptions:
+                return userInput
+            else:
+                print(f"Invalid {inputType}. Please enter one of the following: {', '.join(validOptions)}.")
     
     def getSearchCriteria(self):
         print("\nSearch by: ")
@@ -38,9 +48,16 @@ class UserInterface:
             except ValueError:
                 print("Please enter a valid number.")
     
-    def getSearchQuery(self,filter):
-        query = input(f"Enter the {filter} you want to search for: ")
-        return query
+    def getSearchQuery(self, filter):
+        if filter == "Tier":
+            return self.getValidInput("Enter the Tier you want to search for: ", ["S", "A", "B", "C", "D"], "Tier")
+        elif filter == "Role":
+            return self.getValidInput("Enter the Role you want to search for: ", ["Top", "Mid", "Jungle", "Support", "ADC"], "Role")
+        elif filter == "Difficulty":
+            return self.getValidInput("Enter the Difficulty you want to search for: ", ["Easy", "Medium", "Hard"], "Difficulty")
+        else:
+            return input(f"Enter the {filter} you want to search for: ").capitalize()
+
     
     def displaySearchResults(self,results):
         if not results:
@@ -48,6 +65,15 @@ class UserInterface:
         else:
             for champ in results:
                 print(f"Name: {champ.getName()}, Tier: {champ.getTier()}, Difficulty: {champ.getDifficulty()}, Role: {champ.getRole()}")
+                
+        while True:
+            choice = input("\nWould you like to return to the main menu? (yes/no): ").lower()
+            if choice == "yes":
+                return
+            elif choice == "no":
+                break
+            else:
+                print("Invalid input. Please enter 'yes' or 'no'.")
     
     def displayAllChampions(self,champions):
         sortedChampions = self.sortChampionsByRoleAndTier(champions)
