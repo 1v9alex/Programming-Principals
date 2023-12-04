@@ -16,10 +16,10 @@ class UserInterface:
                 print("Invalid input. Please enter a number.")
     
     def getChampionData(self):
-        name = input("Enter Champion Name: ")
-        tier = input("Enter Tier (S to D): ")
-        difficulty = input("Enter Difficulty (Easy, Medium, Hard): ")
-        role = input("Enter Role (Top, Mid, Jungle, Support, ADC): ")
+        name = input("Enter Champion Name: ").title()
+        tier = input("Enter Tier (S to D): ").upper()
+        difficulty = input("Enter Difficulty (Easy, Medium, Hard): ").capitalize()
+        role = input("Enter Role (Top, Mid, Jungle, Support, ADC): ").capitalize()
         return name, tier, difficulty, role
     
     def getSearchCriteria(self):
