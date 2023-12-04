@@ -6,19 +6,19 @@ class Champion:
         self.role = role
     
     #Getter and Setter Methods for the Champion Class
-    def GetName(self):
+    def getName(self):
         return self.name
     
     def setName(self,name):
         self.name = name
     
-    def GetTier(self):
+    def getTier(self):
         return self.tier
     
     def setTier(self,tier):
         self.tier = tier
         
-    def GetDifficulty(self):
+    def getDifficulty(self):
         return self.difficulty
     
     def setDifficulty(self,difficulty):

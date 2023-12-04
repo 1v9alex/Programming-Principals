@@ -8,7 +8,9 @@ def main():
     ui = UserInterface()
     dataManager = DataPersistenceManager()
     
-    manager.champions = dataManager.loadData("champions.csv")
+    dataFilePath = "C:\\Users\\alexg\\OneDrive\\Desktop\\Programming\\Assignments\\Assignment 4\\champions.csv"
+
+    manager.champions = dataManager.loadData(dataFilePath)
     
     while True:
         ui.displayMenu()
@@ -17,7 +19,7 @@ def main():
         if choice == 1:
             name,tier,difficulty,role = ui.getChampionData()
             manager.addChampion(Champion(name,tier,difficulty,role))
-            print("Champion added successfully.")
+            dataManager.saveData(manager.champions, dataFilePath)
         elif choice == 2:
             searchChoice = ui.getSearchCriteria()
             query = ui.getSearchQuery(["Name","Tier","Difficulty","Role"][searchChoice-1])
@@ -46,7 +48,7 @@ def main():
             print("Please enter a valid choice.")
             
         
-    dataManager.saveData(manager.getAllChampions(), "champions.csv")
+    dataManager.saveData(manager.getAllChampions(), dataFilePath)
     
 if __name__ == "__main__":
     main()
