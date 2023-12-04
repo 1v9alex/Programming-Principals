@@ -2,16 +2,21 @@ import csv
 from Champion import Champion
 
 class DataPersistenceManager:
-    def loadData(self,fileName):
+    def loadData(self, fileName):
         champions = []
         try:
             with open(fileName, mode='r') as file:
                 reader = csv.DictReader(file)
                 for row in reader:
-                    champions.append(Champion(row['Champion Name'], row['Tier'], row['Difficulty'], row['Role']))
+                    name = row['Champion Name'].strip().title()
+                    tier = row['Tier'].strip().upper()
+                    difficulty = row['Difficulty'].strip().capitalize()
+                    role = row['Role'].strip().capitalize()
+                    champions.append(Champion(name, tier, difficulty, role))
         except Exception as e:
             print("Error loading data:", e)
         return champions
+
     
     
     def saveData(self,champions,fileName):

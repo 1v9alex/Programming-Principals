@@ -75,23 +75,41 @@ class UserInterface:
             else:
                 print("Invalid input. Please enter 'yes' or 'no'.")
     
-    def displayAllChampions(self,champions):
+    def displayAllChampions(self, champions):
+        # Define the order of roles
+        roleOrder = ["Top", "Jungle", "Mid", "Adc", "Support"]
         sortedChampions = self.sortChampionsByRoleAndTier(champions)
-        for role in sortedChampions:
-            print(f"\n{role.capitalize()}")
-            for champ in sortedChampions[role]:
-                print(f"{champ.getName()}: {champ.getTier()} Tier")
-            print("-" * 20)
+
+        # Display champions sorted by role and then by tier
+        for role in roleOrder:
+            role = role.capitalize()
+            if role in sortedChampions:
+                print(f"\n{role}")
+                for champ in sortedChampions[role]:
+                    print(f"{champ.getName()}: {champ.getTier()} Tier")
+                print("-" * 20)
+        while True:
+            choice = input("\nWould you like to return to the main menu? (yes/no): ").lower()
+            if choice == "yes":
+                return
+            elif choice == "no":
+                break
+            else:
+                print("Invalid input. Please enter 'yes' or 'no'.")
+
     
-    def sortChampionsByRoleAndTier(self,champions):
+    def sortChampionsByRoleAndTier(self, champions):
+        # Sort champions by role and tier
         sortedChampions = {}
+        tierOrder = {"S": 1, "A": 2, "B": 3, "C": 4, "D": 5}
         for champ in champions:
-            role = champ.getRole().lower()
+            role = champ.getRole().capitalize()
             if role not in sortedChampions:
                 sortedChampions[role] = []
             sortedChampions[role].append(champ)
-            
+        
+        # Sort within each role by tier
         for role in sortedChampions:
-            sortedChampions[role].sort(key=lambda x: x.getTier())
-            
+            sortedChampions[role].sort(key=lambda x: tierOrder[x.getTier()])
+
         return sortedChampions
