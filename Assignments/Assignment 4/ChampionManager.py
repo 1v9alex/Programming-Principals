@@ -52,3 +52,7 @@ class ChampionManager:
         Champions with the specified role will be returned.
         '''
         return [champ for champ in self.champions if champ.getRole() == role]
+    
+    def getAllChampions(self):
+        #gets all champions
+        return self.champions
