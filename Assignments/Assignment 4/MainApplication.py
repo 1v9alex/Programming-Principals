@@ -43,7 +43,12 @@ def main():
                 print(f"No champion found with the name {name}.")
         elif choice == 4:
             name = input("Enter the name of the champion you want to delete: ")
-            manager.deleteChampion(name)
+            if manager.championExists(name):
+                manager.deleteChampion(name)
+                dataManager.saveData(manager.champions, dataFilePath)
+                print(f"{name} has been successfully deleted.")
+            else:
+                print(f"No champion found with the name {name}.")
         elif choice == 5:
             champions = manager.getAllChampions()
             ui.displayAllChampions(champions)

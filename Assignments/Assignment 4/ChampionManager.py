@@ -11,7 +11,9 @@ class ChampionManager:
         Remove a champion from the list by name
         Its done by filtering out the champion whose name matches the one that user will input later
         '''
-        self.champions = [champ for champ in self.champions if champ.getName() != name]
+        initial_length = len(self.champions)
+        self.champions = [champ for champ in self.champions if champ.getName().lower() != name.lower()]
+        return len(self.champions) < initial_length  # Return True if a champion was removed
     
     def updateChampion(self,name,newData):
         '''
