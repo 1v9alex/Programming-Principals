@@ -77,7 +77,7 @@ class UserInterface:
     
     def displayAllChampions(self, champions):
         # Define the order of roles
-        roleOrder = ["Top", "Jungle", "Mid", "Adc", "Support"]
+        roleOrder = ["Top", "Jungle", "Mid", "ADC", "Support"]
         sortedChampions = self.sortChampionsByRoleAndTier(champions)
 
         # Display champions sorted by role and then by tier
