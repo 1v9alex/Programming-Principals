@@ -25,6 +25,7 @@ class ChampionManager:
                 return True
         return False  # Return False if the champion is not found
     
+    #check if a champion exists in the champions list
     def championExists(self, name):
         return any(champ.getName().lower() == name.lower() for champ in self.champions)
     
