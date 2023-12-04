@@ -6,7 +6,7 @@ class DataPersistenceManager:
         champions = []
         try:
             with open(fileName, mode='r') as file:
-                reader = csv.reader(file)
+                reader = csv.DictReader(file)
                 for row in reader:
                     champions.append(Champion(row['Champion Name'], row['Tier'], row['Difficulty'], row['Role']))
         except Exception as e:
@@ -16,7 +16,7 @@ class DataPersistenceManager:
     
     def saveData(self,champions,fileName):
         try:
-            with open(fileName, mode='w',newline='') as file:
+            with open(fileName, mode='w', newline='') as file:
                 fieldnames = ['Champion Name', 'Tier', 'Difficulty', 'Role']
                 writer = csv.DictWriter(file, fieldnames=fieldnames)
                 
