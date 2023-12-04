@@ -22,7 +22,7 @@ class DataPersistenceManager:
                 
                 writer.writeheader()
                 for champ in champions:
-                    writer.writerow({'Champion Name': champ.get_name(), 'Tier': champ.get_tier(), 'Difficulty': champ.get_difficulty(), 'Role': champ.get_role()})
+                    writer.writerow({'Champion Name': champ.getName(), 'Tier': champ.getTier(), 'Difficulty': champ.getDifficulty(), 'Role': champ.getRole()})
         except Exception as e:
             print("Error saving data:", e)
 
