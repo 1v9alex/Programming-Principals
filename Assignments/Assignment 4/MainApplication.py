@@ -34,8 +34,13 @@ def main():
             ui.displaySearchResults(results)
         elif choice == 3:
             name = input("Enter the name of the champion you want to update: ")
-            newData = ui.getChampionData()[1:]
-            manager.updateChampion(name, {'tier': newData[0], 'difficulty': newData[1], 'role': newData[2]})
+            if manager.championExists(name):  # You might need to implement this method
+                newData = ui.getChampionData()[1:]
+                manager.updateChampion(name, {'tier': newData[0], 'difficulty': newData[1], 'role': newData[2]})
+                dataManager.saveData(manager.champions, dataFilePath)
+                print(f"{name} has been updated.")
+            else:
+                print(f"No champion found with the name {name}.")
         elif choice == 4:
             name = input("Enter the name of the champion you want to delete: ")
             manager.deleteChampion(name)

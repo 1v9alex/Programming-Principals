@@ -19,12 +19,16 @@ class ChampionManager:
         It searches for the champion by name and updates its data
         '''
         for champ in self.champions:
-            if champ.getName() == name:
+            if champ.getName().lower() == name.lower():  # Case-insensitive comparison
                 champ.setTier(newData['tier'])
                 champ.setDifficulty(newData['difficulty'])
                 champ.setRole(newData['role'])
-                break
-            
+                return True
+        return False  # Return False if the champion is not found
+    
+    def championExists(self, name):
+        return any(champ.getName().lower() == name.lower() for champ in self.champions)
+    
     def searchByName(self, name):
         '''
         Searches for champions by name and returns a list of matching champions.
