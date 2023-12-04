@@ -2,6 +2,7 @@ import csv
 from Champion import Champion
 
 class DataPersistenceManager:
+    #load the data from the file and return it
     def loadData(self, fileName):
         champions = []
         try:
@@ -20,6 +21,7 @@ class DataPersistenceManager:
     
     
     def saveData(self,champions,fileName):
+        #save the data to the file
         try:
             with open(fileName, mode='w', newline='') as file:
                 fieldnames = ['Champion Name', 'Tier', 'Difficulty', 'Role']
