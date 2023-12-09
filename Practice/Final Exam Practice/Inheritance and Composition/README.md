@@ -93,30 +93,70 @@
 2. **Rectangle and Circle Classes**:
    - Code the `Rectangle` and `Circle` classes with appropriate methods for area and perimeter calculation.
 
-### Easy
+# Python Object-Oriented Programming Practice
 
-1. **Employee Management Program**:
-   - Implement the `Employee`, `Manager`, and `Intern` classes.
-   - Include methods to display employee details.
+## Easy
 
-2. **Ebook Class Implementation**:
-   - Code the `Ebook` class with additional attributes like `filesize` and `format`.
+1. **Employee System Setup**:
+   - Create a base class `Employee` with attributes like `name`, `employee_id`, and `department`.
+   - Extend `Employee` with subclasses `Developer` and `Designer`, adding unique methods or attributes.
 
-### Medium
+2. **Book Classification System**:
+   - Create a base class `Book` with attributes like `title`, `author`, and `publication_year`.
+   - Extend into genres `FictionBook` and `NonFictionBook` with specific attributes.
 
-1. **School Management Program**:
-   - Implement the `Student` and `Teacher` classes.
-   - Include methods like `attendClass` for students and `teachClass` for teachers.
+3. **Educational Institution System**:
+   - Create a base class `Person` with attributes like `name` and `age`.
+   - Extend with `Student` and `Teacher`, adding specific attributes like `courses_taught` and `enrolled_courses`.
 
-2. **Bank Account Simulation**:
-   - Code the `SavingsAccount` and `CheckingAccount` with methods for deposit, withdrawal, and interest calculation.
+4. **Simple Banking System Setup**:
+   - Create a base class `BankAccount` with attributes like `account_number`, `owner_name`, and `balance`.
+   - Extend with `SavingsAccount` and `CheckingAccount`, adding unique attributes like `interest_rate` and `transaction_limit`.
 
-### Hard
+5. **Basic Geometric Shapes**:
+   - Make a base class `Shape` with methods for area and perimeter.
+   - Extend into `Rectangle` and `Triangle` with specific shape calculations.
 
-1. **Online Store Simulation**:
-   - Implement the `Product`, `Book`, `Electronics` classes.
-   - Include methods for pricing, discount calculation, etc.
+## Medium
 
-2. **Transportation System Simulation**:
-   - Code the `Car`, `Bike`, and `Truck` classes.
-   - Include specific attributes like `fuelType`, `capacity`.
+1. **Advanced Employee Management**:
+   - Enhance your `Employee` class system.
+   - Include methods for promotions, raises, and detailed information display.
+
+2. **Library Management System**:
+   - Build upon your `Book` class.
+   - Add functionalities for borrowing, returning, and availability status.
+
+3. **School Subjects and Classes System**:
+   - Expand `Teacher` and `Student` classes.
+   - Include handling of multiple subjects and classes, assignment functionalities.
+
+4. **Intermediate Banking System**:
+   - Enhance your `BankAccount` system.
+   - Add transaction handling, fraud detection, and account recovery.
+
+5. **Polygon Shape System**:
+   - Develop a system based on your `Shape` class.
+   - Include polygons like `Pentagon`, `Hexagon` with area and perimeter methods.
+
+## Hard
+
+1. **Complex Employee Hierarchy**:
+   - Extend your employee system with a complex hierarchy.
+   - Implement multiple levels of management and staff with distinct roles.
+
+2. **Advanced Library System**:
+   - Develop an extensive library system.
+   - Include user accounts, reservations, and late fees functionalities.
+
+3. **Comprehensive School Management System**:
+   - Create a system to manage a school.
+   - Include scheduling, grading, and extracurricular activities.
+
+4. **Full-Fledged Banking Application**:
+   - Build a complete banking application.
+   - Manage account types, loans, interest, and customer service.
+
+5. **Advanced Geometric Shape Calculator**:
+   - Create a calculator for a variety of shapes.
+   - Handle regular and irregular shapes with complex calculations.
