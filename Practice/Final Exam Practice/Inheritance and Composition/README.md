@@ -114,4 +114,9 @@
 ### Hard
 
 1. **Online Store Simulation**:
-   - Implement the `Product`, `
+   - Implement the `Product`, `Book`, `Electronics` classes.
+   - Include methods for pricing, discount calculation, etc.
+
+2. **Transportation System Simulation**:
+   - Code the `Car`, `Bike`, and `Truck` classes.
+   - Include specific attributes like `fuelType`, `capacity`.
