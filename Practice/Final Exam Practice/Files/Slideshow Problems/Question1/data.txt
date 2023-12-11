@@ -1,0 +1,17 @@
+hello
+friends
+i
+am
+alex
+doing
+question
+1
+which
+is
+Write a Python program that reads a text file and counts the number of
+words in the file. Print the word count to the console.
+in
+total
+this
+is around
+42 words
