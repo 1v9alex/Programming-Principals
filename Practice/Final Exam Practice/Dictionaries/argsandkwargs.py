@@ -43,3 +43,9 @@ def whatTechTheyUse(**kwargs):
     return result
 
 print(whatTechTheyUse(Google="Angular",Facebook='react',Microsoft=".NET"))
+
+
+def my_func(*args, **kwargs):
+    return args, kwargs
+
+print(my_func(1, 2, a=3, b=4))
